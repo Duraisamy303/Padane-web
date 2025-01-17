@@ -7,18 +7,17 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Menu(props: any) {
-  const { handleTabClick } = props;
-  const tabs = ["Filter", "All Events", "Wall"];
+  const { handleTabClick ,tabs} = props;
   const [search, setSearch] = useState("");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleClick = (item: string) => {
-    if (item === "Filter") {
-      setIsSidebarOpen(true);
-    } else {
-      setIsSidebarOpen(false);
-    }
+    // if (item === "Filter") {
+    //   setIsSidebarOpen(true);
+    // } else {
+    //   setIsSidebarOpen(false);
+    // }
     handleTabClick(item);
   };
 
@@ -31,7 +30,7 @@ export default function Menu(props: any) {
       <div className="flex items-center  justify-between">
         <Tabs defaultValue="filter " className="">
           <TabsList className="flex gap-4 bg-white md:gap-8">
-            {tabs.map((item, index) => (
+            {tabs.map((item:any, index:any) => (
               <TabsTrigger
                 key={index}
                 value={item.toLowerCase()}
