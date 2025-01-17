@@ -8,8 +8,13 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Menu from "@/common_components/menu";
 import Sidebar from "@/common_components/sidebar";
+import { useSetState } from "@/utils/functions.utils";
 
 export default function Index() {
+
+  const [state,setState]=useSetState({
+    acitveTab:0
+  })
   const [search, setSearch] = useState("");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,6 +27,7 @@ export default function Index() {
     <div className="h-screen w-full">
       <Navbar />
       <Menu
+      tabs={tabs}
         handleTabClick={(item:any) => {
           if (item == "Filter") {
             setIsSidebarOpen(true);
