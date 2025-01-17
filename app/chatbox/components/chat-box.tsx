@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Avatar } from "@radix-ui/react-avatar";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
-import { X } from "lucide-react";
+import { SendIcon, X } from "lucide-react";
 
 const ChatOption = () => {
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
@@ -251,14 +251,14 @@ const ChatOption = () => {
               ref={messageInputRef}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full rounded-l-lg border p-2"
+              className="w-full rounded-r-lg border p-2"
               placeholder="Type a message..."
             />
             <Button
               onClick={handleSendMessage}
-              className="rounded-r-lg bg-blue-500 px-4 py-2 text-white"
+              className="rounded-r-lg bg-blue-500 p-2 text-white"
             >
-              Send
+              <SendIcon />
             </Button>
           </div>
         </div>
