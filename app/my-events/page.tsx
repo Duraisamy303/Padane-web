@@ -80,18 +80,6 @@ export default function Index() {
     { label: "Guitar", value: "guitar" },
     { label: "Piano", value: "piano" },
   ];
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (state.selectedTab === "musician") {
-      setState({ ...state, musicianSearch: value });
-    } else if (state.selectedTab === "troupe") {
-      setState({ ...state, troupeSearch: value });
-    } else if (state.selectedTab === "band") {
-      setState({ ...state, bandSearch: value });
-    }
-  };
-
   const peopleData = {
     musician: [
       { name: "John Doe", logo: Assets.mobile_ping_1 },
@@ -110,12 +98,36 @@ export default function Index() {
     ],
   };
 
-  // Get the list based on the current selected tab
   const filteredPeople = peopleData[state.selectedTab]?.filter((person) =>
-    person?.name
-      ?.toLowerCase()
-      ?.includes(state[state.selectedTab + "Search"]?.toLowerCase()),
+    person.name
+      .toLowerCase()
+      .includes(state[`${state.selectedTab}Search`]?.toLowerCase()),
   );
+  console.log("filteredPeople: ", filteredPeople);
+
+  // Handle search changes for each tab
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setState({ ...state, [`${state.selectedTab}Search`]: value });
+  };
+
+  // Handle checkbox selection for people in the list
+  const handleSelectChange = (person: { name: string; logo: string }) => {
+    const selectedList = state[`${state.selectedTab}Select`];
+    if (selectedList.includes(person.name)) {
+      setState({
+        ...state,
+        [`${state.selectedTab}Select`]: selectedList.filter(
+          (name) => name !== person.name,
+        ),
+      });
+    } else {
+      setState({
+        ...state,
+        [`${state.selectedTab}Select`]: [...selectedList, person.name],
+      });
+    }
+  };
 
   return (
     <div className="h-screen w-full">
@@ -461,9 +473,7 @@ export default function Index() {
                 <>
                   <Tabs
                     value={state.selectedTab}
-                    onValueChange={(value) =>
-                      setState({ ...state, selectedTab: value })
-                    }
+                    onValueChange={(value) => setState({ selectedTab: value })}
                   >
                     <TabsList className="w-full justify-evenly">
                       <TabsTrigger value="musician">
@@ -472,21 +482,17 @@ export default function Index() {
                       <TabsTrigger value="troupe">Troupe Search</TabsTrigger>
                       <TabsTrigger value="band">Band Search</TabsTrigger>
                     </TabsList>
+
                     <TabsContent value="musician">
                       <div className="flex gap-4">
                         <div className="flex-1">
                           <Input
                             placeholder="Search Musicians"
                             value={state.musicianSearch}
-                            onChange={(value) =>
-                              setState({ musicianSearch: value })
-                            }
+                            onChange={handleSearchChange}
                           />
                           <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
+                            <label className="block text-sm font-medium">
                               Skills
                             </label>
                             <Combobox
@@ -508,7 +514,6 @@ export default function Index() {
                             </label>
                             <Combobox
                               options={options}
-                            
                               selectedValues={state.skillLevel}
                               onChange={(value) =>
                                 setState({ skillLevel: value })
@@ -518,35 +523,12 @@ export default function Index() {
                             />
                           </div>
                           <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
-                              Gender
-                            </label>
-                            <Combobox
-                              options={options}
-                              selectedValues={state.gender}
-                              onChange={(value) =>
-                                setState({ gender: value })
-                              }
-                              isMulti={false}
-                              placeholder="Gender"
-                            />
-                          </div>
-                          <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
+                            <label className="block text-sm font-medium">
                               Location
                             </label>
                             <Combobox
                               options={options}
-                              selectedValues={state.musicianLocation}
-                              onChange={(value) =>
-                                setState({ musicianLocation: value })
-                              }
+                              selectedValues={[]}
                               isMulti={false}
                               placeholder="Select Location"
                             />
@@ -557,17 +539,34 @@ export default function Index() {
                         <div className="flex-1 overflow-y-auto">
                           <ul className="space-y-2">
                             {filteredPeople?.map((person, index) => (
-                              <li key={index} className="border-b p-2">
-                                {person}
+                              <li
+                                key={index}
+                                className="flex items-center border-b p-2"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={state.musicianSelect.includes(
+                                    person.name,
+                                  )}
+                                  onChange={() => handleSelectChange(person)}
+                                  className="mr-4"
+                                />
+                                <Image
+                                  src={person.logo}
+                                  alt={person.name}
+                                  className="h-12 w-12 rounded-full object-cover"
+                                />
+                                <span>{person.name}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
                     </TabsContent>
+
+                    {/* Similar TabsContent for 'troupe' */}
                     <TabsContent value="troupe">
                       <div className="flex gap-4">
-                        {/* Left side - Filter Options */}
                         <div className="flex-1">
                           <Input
                             placeholder="Search Troupes"
@@ -575,54 +574,23 @@ export default function Index() {
                             onChange={handleSearchChange}
                           />
                           <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
+                            <label className="block text-sm font-medium">
                               Skills
                             </label>
                             <Combobox
                               options={options}
-                            
-                              selectedValues={state.troupeSkill}
-                              onChange={(value) =>
-                                setState({ troupeSkill: value })
-                              }
+                              selectedValues={[]}
                               isMulti={false}
                               placeholder="Select Skill"
                             />
                           </div>
-
                           <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
-                              Gender
-                            </label>
-                            <Combobox
-                              options={options}
-                              selectedValues={state.troupeGender}
-                              onChange={(value) =>
-                                setState({ troupeGender: value })
-                              }
-                              isMulti={false}
-                              placeholder="Gender"
-                            />
-                          </div>
-                          <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
+                            <label className="block text-sm font-medium">
                               Location
                             </label>
                             <Combobox
                               options={options}
-                              selectedValues={state.troupeLocation}
-                              onChange={(value) =>
-                                setState({ troupeLocation: value })
-                              }
+                              selectedValues={[]}
                               isMulti={false}
                               placeholder="Select Location"
                             />
@@ -633,73 +601,58 @@ export default function Index() {
                         <div className="flex-1 overflow-y-auto">
                           <ul className="space-y-2">
                             {filteredPeople?.map((person, index) => (
-                              <li key={index} className="border-b p-2">
-                                {person}
+                              <li
+                                key={index}
+                                className="flex items-center border-b p-2"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={state.troupeSelect.includes(
+                                    person.name,
+                                  )}
+                                  onChange={() => handleSelectChange(person)}
+                                  className="mr-4"
+                                />
+                                <Image
+                                  src={person.logo}
+                                  alt={person.name}
+                                  className="h-12 w-12 rounded-full object-cover"
+                                />
+                                <span>{person.name}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
                     </TabsContent>
+
+                    {/* Similar TabsContent for 'band' */}
                     <TabsContent value="band">
                       <div className="flex gap-4">
-                        {/* Left side - Filter Options */}
                         <div className="flex-1">
                           <Input
                             placeholder="Search Bands"
                             value={state.bandSearch}
                             onChange={handleSearchChange}
                           />
-
                           <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
+                            <label className="block text-sm font-medium">
                               Skills
                             </label>
                             <Combobox
                               options={options}
-                      
-                              selectedValues={state.bandSkill}
-                              onChange={(value) =>
-                                setState({ bandSkill: value })
-                              }
+                              selectedValues={[]}
                               isMulti={false}
                               placeholder="Select Skill"
                             />
                           </div>
-                         
                           <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
-                              Gender
-                            </label>
-                            <Combobox
-                              options={options}
-                              selectedValues={state.bandGender}
-                              onChange={(value) =>
-                                setState({ bandGender: value })
-                              }
-                              isMulti={false}
-                              placeholder="Gender"
-                            />
-                          </div>
-                          <div className="pt-3">
-                            <label
-                              htmlFor="eventCategory"
-                              className="block text-sm font-medium"
-                            >
+                            <label className="block text-sm font-medium">
                               Location
                             </label>
                             <Combobox
                               options={options}
-                              selectedValues={state.bandLocation}
-                              onChange={(value) =>
-                                setState({ bandLocation: value })
-                              }
+                              selectedValues={[]}
                               isMulti={false}
                               placeholder="Select Location"
                             />
@@ -710,11 +663,22 @@ export default function Index() {
                         <div className="flex-1 overflow-y-auto">
                           <ul className="space-y-2">
                             {filteredPeople?.map((person, index) => (
-                              <li className="flex items-center border-b p-2">
+                              <li
+                                key={index}
+                                className="flex items-center border-b p-2"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={state.bandSelect.includes(
+                                    person.name,
+                                  )}
+                                  onChange={() => handleSelectChange(person)}
+                                  className="mr-4"
+                                />
                                 <Image
                                   src={person.logo}
                                   alt={person.name}
-                                  className="mr-4 h-12 w-12 rounded-full object-cover"
+                                  className="h-12 w-12 rounded-full object-cover"
                                 />
                                 <span>{person.name}</span>
                               </li>

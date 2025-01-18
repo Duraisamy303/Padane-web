@@ -77,8 +77,6 @@ export const capitalizeFLetter = (string = '') => {
 };
 
 
-
-
 export const objIsEmpty = (obj: object) => {
     for (let key in obj) {
         if (obj.hasOwnProperty(key)) return false;
