@@ -11,12 +11,27 @@ import { DatePicker } from "@/common_components/datePicker";
 import Dropdown from "@/common_components/dropdown";
 import { Switchs } from "@/common_components/switch";
 import Modal from "@/common_components/modal";
+import Combobox from "@/common_components/dropdown";
+import { CheckboxDemo } from "@/common_components/checkbox";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"; // Tabs from Shadcn
+import Assets from "@/imports/assets.import";
+import Image from "next/image";
 
 export default function Index() {
   const [state, setState] = useSetState({
     activeTab: "Upcoming Event",
     isModalOpen: false,
+    selectSkill: "",
+    skills: [],
+    isPeopleOpen: false,
   });
+
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+  const handleSelectionChange = (newSelection: string[]) => {
+    setState({ musicianselectSkill: newSelection });
+    setSelectedItems(newSelection); // Update the selected items
+  };
 
   const tabs = ["Upcoming Event", "Completed Event", "Create New Event"];
 
@@ -50,6 +65,57 @@ export default function Index() {
     const { name, checked } = e.target;
     setEventData({ ...eventData, [name]: checked });
   };
+
+  const options = [
+    { value: "next.js", label: "Next.js" },
+    { value: "sveltekit", label: "SvelteKit" },
+    { value: "nuxt.js", label: "Nuxt.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+  ];
+
+  const checkboxOptions = [
+    { label: "Mridangam", value: "mridangam" },
+    { label: "Veena", value: "veena" },
+    { label: "Guitar", value: "guitar" },
+    { label: "Piano", value: "piano" },
+  ];
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (state.selectedTab === "musician") {
+      setState({ ...state, musicianSearch: value });
+    } else if (state.selectedTab === "troupe") {
+      setState({ ...state, troupeSearch: value });
+    } else if (state.selectedTab === "band") {
+      setState({ ...state, bandSearch: value });
+    }
+  };
+
+  const peopleData = {
+    musician: [
+      { name: "John Doe", logo: Assets.mobile_ping_1 },
+      { name: "Jane Smith", logo: Assets.mobile_ping_1 },
+      { name: "Alex Brown", logo: Assets.mobile_ping_1 },
+    ],
+    troupe: [
+      { name: "Troupe A", logo: Assets.mobile_ping_1 },
+      { name: "Troupe B", logo: Assets.mobile_ping_1 },
+      { name: "Troupe C", logo: Assets.mobile_ping_1 },
+    ],
+    band: [
+      { name: "Band X", logo: Assets.mobile_ping_1 },
+      { name: "Band Y", logo: Assets.mobile_ping_1 },
+      { name: "Band Z", logo: Assets.mobile_ping_1 },
+    ],
+  };
+
+  // Get the list based on the current selected tab
+  const filteredPeople = peopleData[state.selectedTab]?.filter((person) =>
+    person?.name
+      ?.toLowerCase()
+      ?.includes(state[state.selectedTab + "Search"]?.toLowerCase()),
+  );
 
   return (
     <div className="h-screen w-full">
@@ -92,7 +158,13 @@ export default function Index() {
                 >
                   Event Category
                 </label>
-                <Dropdown placeholder="Select Event Category" />
+                <Combobox
+                  options={options}
+                  selectedValues={state.eventCategory}
+                  onChange={(value) => setState({ eventCategory: value })}
+                  isMulti={false}
+                  placeholder="Select Event Category"
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label
@@ -101,7 +173,13 @@ export default function Index() {
                 >
                   Event Type
                 </label>
-                <Dropdown placeholder="Select Event Type" />
+                <Combobox
+                  options={options}
+                  selectedValues={state.eventType}
+                  onChange={(value) => setState({ eventType: value })}
+                  isMulti={false}
+                  placeholder="Select Event Type"
+                />
               </div>
             </div>
 
@@ -143,16 +221,18 @@ export default function Index() {
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
-                <label htmlFor="location" className="block text-sm font-medium">
+                <label
+                  htmlFor="eventCategory"
+                  className="block text-sm font-medium"
+                >
                   Location
                 </label>
-                <Input
-                  id="location"
-                  name="location"
-                  value={eventData.location}
-                  onChange={handleChange}
-                  className="mt-2 w-full"
-                  placeholder="Enter event location"
+                <Combobox
+                  options={options}
+                  selectedValues={state.location}
+                  onChange={(value) => setState({ location: value })}
+                  isMulti={false}
+                  placeholder="Select Location"
                 />
               </div>
 
@@ -299,7 +379,13 @@ export default function Index() {
               >
                 Call For
               </Button>
-              <Button className="mt-6 w-full">Add People</Button>
+              <Button
+                className="mt-6 w-full"
+                type="button"
+                onClick={() => setState({ isPeopleOpen: true })}
+              >
+                Add People
+              </Button>
               <Button className="mt-6 w-full">Create Event</Button>
             </div>
 
@@ -309,6 +395,352 @@ export default function Index() {
             <Modal
               open={state.isModalOpen}
               onClose={() => setState({ isModalOpen: false })}
+              onSubmit={() => setState({ isModalOpen: false })}
+              title={"Required Skill"}
+              renderComponent={() => (
+                <>
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="eventCategory"
+                      className="block text-sm font-medium"
+                    >
+                      Choose a category
+                    </label>
+                    <Combobox
+                      options={options}
+                      selectedValues={state.selectSkill}
+                      onChange={(value) => setState({ selectSkill: value })}
+                      isMulti={false}
+                      placeholder="Select Skill"
+                    />
+                    <label
+                      htmlFor="eventCategory"
+                      className="block text-lg font-bold"
+                    >
+                      Skill
+                    </label>
+                    <div className="flex flex-col gap-3">
+                      {checkboxOptions.map(({ label, value }) => (
+                        <CheckboxDemo
+                          key={value}
+                          label={label}
+                          value={value}
+                          selectedValues={state.skills}
+                          onChange={(data) => setState({ skills: data })}
+                          isMulti={true}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex justify-end gap-5">
+                    <Button
+                      variant="outline"
+                      className="sm:w-auto lg:w-[100px]"
+                      onClick={() => setState({ isModalOpen: false })}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      className="sm:w-auto lg:w-[100px]"
+                      onClick={() => setState({ isModalOpen: false })}
+                    >
+                      Confirm
+                    </Button>
+                  </div>
+                </>
+              )}
+            />
+
+            <Modal
+              open={state.isPeopleOpen}
+              onClose={() => setState({ isPeopleOpen: false })}
+              onSubmit={() => setState({ isPeopleOpen: false })}
+              title={"Choose People"}
+              width="1000px"
+              renderComponent={() => (
+                <>
+                  <Tabs
+                    value={state.selectedTab}
+                    onValueChange={(value) =>
+                      setState({ ...state, selectedTab: value })
+                    }
+                  >
+                    <TabsList className="w-full justify-evenly">
+                      <TabsTrigger value="musician">
+                        Musician Search
+                      </TabsTrigger>
+                      <TabsTrigger value="troupe">Troupe Search</TabsTrigger>
+                      <TabsTrigger value="band">Band Search</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="musician">
+                      <div className="flex gap-4">
+                        <div className="flex-1">
+                          <Input
+                            placeholder="Search Musicians"
+                            value={state.musicianSearch}
+                            onChange={(value) =>
+                              setState({ musicianSearch: value })
+                            }
+                          />
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Skills
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.musicianselectSkill}
+                              onChange={(value) =>
+                                setState({ musicianselectSkill: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Skill"
+                            />
+                          </div>
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Skill level
+                            </label>
+                            <Combobox
+                              options={options}
+                            
+                              selectedValues={state.skillLevel}
+                              onChange={(value) =>
+                                setState({ skillLevel: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Level"
+                            />
+                          </div>
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Gender
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.gender}
+                              onChange={(value) =>
+                                setState({ gender: value })
+                              }
+                              isMulti={false}
+                              placeholder="Gender"
+                            />
+                          </div>
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Location
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.musicianLocation}
+                              onChange={(value) =>
+                                setState({ musicianLocation: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Location"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Right side - User Profiles/List */}
+                        <div className="flex-1 overflow-y-auto">
+                          <ul className="space-y-2">
+                            {filteredPeople?.map((person, index) => (
+                              <li key={index} className="border-b p-2">
+                                {person}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent value="troupe">
+                      <div className="flex gap-4">
+                        {/* Left side - Filter Options */}
+                        <div className="flex-1">
+                          <Input
+                            placeholder="Search Troupes"
+                            value={state.troupeSearch}
+                            onChange={handleSearchChange}
+                          />
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Skills
+                            </label>
+                            <Combobox
+                              options={options}
+                            
+                              selectedValues={state.troupeSkill}
+                              onChange={(value) =>
+                                setState({ troupeSkill: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Skill"
+                            />
+                          </div>
+
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Gender
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.troupeGender}
+                              onChange={(value) =>
+                                setState({ troupeGender: value })
+                              }
+                              isMulti={false}
+                              placeholder="Gender"
+                            />
+                          </div>
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Location
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.troupeLocation}
+                              onChange={(value) =>
+                                setState({ troupeLocation: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Location"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Right side - User Profiles/List */}
+                        <div className="flex-1 overflow-y-auto">
+                          <ul className="space-y-2">
+                            {filteredPeople?.map((person, index) => (
+                              <li key={index} className="border-b p-2">
+                                {person}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent value="band">
+                      <div className="flex gap-4">
+                        {/* Left side - Filter Options */}
+                        <div className="flex-1">
+                          <Input
+                            placeholder="Search Bands"
+                            value={state.bandSearch}
+                            onChange={handleSearchChange}
+                          />
+
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Skills
+                            </label>
+                            <Combobox
+                              options={options}
+                      
+                              selectedValues={state.bandSkill}
+                              onChange={(value) =>
+                                setState({ bandSkill: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Skill"
+                            />
+                          </div>
+                         
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Gender
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.bandGender}
+                              onChange={(value) =>
+                                setState({ bandGender: value })
+                              }
+                              isMulti={false}
+                              placeholder="Gender"
+                            />
+                          </div>
+                          <div className="pt-3">
+                            <label
+                              htmlFor="eventCategory"
+                              className="block text-sm font-medium"
+                            >
+                              Location
+                            </label>
+                            <Combobox
+                              options={options}
+                              selectedValues={state.bandLocation}
+                              onChange={(value) =>
+                                setState({ bandLocation: value })
+                              }
+                              isMulti={false}
+                              placeholder="Select Location"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Right side - User Profiles/List */}
+                        <div className="flex-1 overflow-y-auto">
+                          <ul className="space-y-2">
+                            {filteredPeople?.map((person, index) => (
+                              <li className="flex items-center border-b p-2">
+                                <Image
+                                  src={person.logo}
+                                  alt={person.name}
+                                  className="mr-4 h-12 w-12 rounded-full object-cover"
+                                />
+                                <span>{person.name}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                  <div className="flex justify-end gap-5">
+                    <Button
+                      variant="outline"
+                      className="sm:w-auto lg:w-[100px]"
+                      onClick={() => setState({ isPeopleOpen: false })}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      className="sm:w-auto lg:w-[100px]"
+                      onClick={() => setState({ isPeopleOpen: false })}
+                    >
+                      Confirm
+                    </Button>
+                  </div>
+                </>
+              )}
             />
           </form>
         </div>
