@@ -1,9 +1,14 @@
 "use client";
 
 import Navbar from "@/common_components/nav";
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
+import Link from "next/link";
 import Menu from "@/common_components/menu";
 import { useSetState } from "@/utils/functions.utils";
+import Assets from "@/imports/assets.import";
+import Models from "@/imports/models.import";
+import { Card } from "@/components/ui/card";
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -14,28 +19,82 @@ import Modal from "@/common_components/modal";
 import Combobox from "@/common_components/dropdown";
 import { CheckboxDemo } from "@/common_components/checkbox";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"; // Tabs from Shadcn
-import Assets from "@/imports/assets.import";
-import Image from "next/image";
+
+const sampleData = [
+  {
+    id: 1,
+    image: Assets.logo,
+    username: "User 1",
+    followers: 10,
+    following: 20,
+  },
+  {
+    id: 2,
+    image: Assets.mobile_ping_1,
+    username: "User 2",
+    followers: 15,
+    following: 25,
+  },
+  {
+    id: 3,
+    image: Assets.mobile_ping_1,
+    username: "User 3",
+    followers: 30,
+    following: 40,
+  },
+  {
+    id: 4,
+    image: Assets.mobile_ping_1,
+    username: "User 4",
+    followers: 50,
+    following: 60,
+  },
+  {
+    id: 5,
+    image: Assets.mobile_ping_1,
+    username: "User 5",
+    followers: 70,
+    following: 80,
+  },
+  {
+    id: 6,
+    image: Assets.mobile_ping_1,
+    username: "User 6",
+    followers: 90,
+    following: 100,
+  },
+];
+
+const activity = [
+  {
+    id: 1,
+    image: Assets.mobile_ping_1,
+    description: "Durai accepted your invitation to New Eventss.",
+    time: "4 months, 4 weeks ago",
+  },
+  {
+    id: 2,
+    image: Assets.mobile_ping_1,
+    description: "Durai accepted your invitation to New Eventss.",
+    time: "3 months, 2 weeks ago",
+  },
+  {
+    id: 3,
+    image: Assets.mobile_ping_1,
+    description: "Durai accepted your invitation to New Eventss.",
+    time: "2 months, 1 week ago",
+  },
+];
+
+
 
 export default function Index() {
   const [state, setState] = useSetState({
     activeTab: "Upcoming Event",
-    isModalOpen: false,
-    selectSkill: "",
-    skills: [],
-    isPeopleOpen: false,
+    skills:[]
   });
 
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
-  const handleSelectionChange = (newSelection: string[]) => {
-    setState({ musicianselectSkill: newSelection });
-    setSelectedItems(newSelection); // Update the selected items
-  };
-
-  const tabs = ["Upcoming Event", "Completed Event", "Create New Event"];
-
-  // Form state
   const [eventData, setEventData] = useState({
     eventName: "",
     eventCategory: "",
@@ -55,91 +114,179 @@ export default function Index() {
     isOpenModal: false,
   });
 
+const options = [
+  { value: "next.js", label: "Next.js" },
+  { value: "sveltekit", label: "SvelteKit" },
+  { value: "nuxt.js", label: "Nuxt.js" },
+  { value: "remix", label: "Remix" },
+  { value: "astro", label: "Astro" },
+];
+
+const checkboxOptions = [
+  { label: "Mridangam", value: "mridangam" },
+  { label: "Veena", value: "veena" },
+  { label: "Guitar", value: "guitar" },
+  { label: "Piano", value: "piano" },
+];
+const peopleData = {
+  musician: [
+    { name: "John Doe", logo: Assets.mobile_ping_1 },
+    { name: "Jane Smith", logo: Assets.mobile_ping_1 },
+    { name: "Alex Brown", logo: Assets.mobile_ping_1 },
+  ],
+  troupe: [
+    { name: "Troupe A", logo: Assets.mobile_ping_1 },
+    { name: "Troupe B", logo: Assets.mobile_ping_1 },
+    { name: "Troupe C", logo: Assets.mobile_ping_1 },
+  ],
+  band: [
+    { name: "Band X", logo: Assets.mobile_ping_1 },
+    { name: "Band Y", logo: Assets.mobile_ping_1 },
+    { name: "Band Z", logo: Assets.mobile_ping_1 },
+  ],
+};
+
+const filteredPeople = peopleData[state.selectedTab]?.filter((person) =>
+  person.name
+    .toLowerCase()
+    .includes(state[`${state.selectedTab}Search`]?.toLowerCase()),
+);
+console.log("filteredPeople: ", filteredPeople);
+
+// Handle search changes for each tab
+const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { value } = e.target;
+  setState({ ...state, [`${state.selectedTab}Search`]: value });
+};
+
+// Handle checkbox selection for people in the list
+const handleSelectChange = (person: { name: string; logo: string }) => {
+  const selectedList = state[`${state.selectedTab}Select`];
+  if (selectedList.includes(person.name)) {
+    setState({
+      ...state,
+      [`${state.selectedTab}Select`]: selectedList.filter(
+        (name) => name !== person.name,
+      ),
+    });
+  } else {
+    setState({
+      ...state,
+      [`${state.selectedTab}Select`]: [...selectedList, person.name],
+    });
+  }
+};
+
+  useEffect(() => {
+    getDate();
+  }, []);
+
+  const getDate = async () => {
+    try {
+      const body = {
+        name: "",
+        skill: [],
+        skill_category: [],
+        location: [],
+        people_type: [],
+      };
+      const res = await Models.MyNetwork.list(body);
+      console.log("res: ", res);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
 
-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setEventData({ ...eventData, [name]: checked });
-  };
-
-  const options = [
-    { value: "next.js", label: "Next.js" },
-    { value: "sveltekit", label: "SvelteKit" },
-    { value: "nuxt.js", label: "Nuxt.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-  ];
-
-  const checkboxOptions = [
-    { label: "Mridangam", value: "mridangam" },
-    { label: "Veena", value: "veena" },
-    { label: "Guitar", value: "guitar" },
-    { label: "Piano", value: "piano" },
-  ];
-  const peopleData = {
-    musician: [
-      { name: "John Doe", logo: Assets.mobile_ping_1 },
-      { name: "Jane Smith", logo: Assets.mobile_ping_1 },
-      { name: "Alex Brown", logo: Assets.mobile_ping_1 },
-    ],
-    troupe: [
-      { name: "Troupe A", logo: Assets.mobile_ping_1 },
-      { name: "Troupe B", logo: Assets.mobile_ping_1 },
-      { name: "Troupe C", logo: Assets.mobile_ping_1 },
-    ],
-    band: [
-      { name: "Band X", logo: Assets.mobile_ping_1 },
-      { name: "Band Y", logo: Assets.mobile_ping_1 },
-      { name: "Band Z", logo: Assets.mobile_ping_1 },
-    ],
-  };
-
-  const filteredPeople = peopleData[state.selectedTab]?.filter((person) =>
-    person.name
-      .toLowerCase()
-      .includes(state[`${state.selectedTab}Search`]?.toLowerCase()),
-  );
-  console.log("filteredPeople: ", filteredPeople);
-
-  // Handle search changes for each tab
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setState({ ...state, [`${state.selectedTab}Search`]: value });
-  };
-
-  // Handle checkbox selection for people in the list
-  const handleSelectChange = (person: { name: string; logo: string }) => {
-    const selectedList = state[`${state.selectedTab}Select`];
-    if (selectedList.includes(person.name)) {
-      setState({
-        ...state,
-        [`${state.selectedTab}Select`]: selectedList.filter(
-          (name) => name !== person.name,
-        ),
-      });
-    } else {
-      setState({
-        ...state,
-        [`${state.selectedTab}Select`]: [...selectedList, person.name],
-      });
-    }
-  };
+  const tabs = ["Upcoming Event", "Completed Event", "Create New Event"];
 
   return (
     <div className="h-screen w-full">
       <Navbar />
-      {/* <Menu
+      <Menu
         tabs={tabs}
         handleTabClick={(item: any) => {
           setState({ activeTab: item });
         }}
-      /> */}
+      />
+      {state.activeTab !== "Create New Event" ? (
+        <div className="flex h-full flex-col p-4 md:flex-row">
+          <div className="grid w-full grid-cols-1 gap-6 px-4 md:w-3/4 ">
+            {sampleData.map((item) => (
+              <Card
+                key={item.id}
+                className="flex flex-col rounded-lg  bg-white shadow-md lg:flex-row lg:p-4"
+              >
+                <div className="bg-black">
+                  <Image
+                    src={item.image}
+                    alt={item.username}
+                    width={200}
+                    height={200}
+                    className="mb-4 rounded-full object-cover lg:mb-0 lg:mr-6 "
+                  />
+                </div>
+                <div className="flex w-full flex-col lg:pl-10 lg:text-left">
+                  <div className="flex w-full items-center justify-between">
+                    <p className="text-xl font-semibold">
+                      {"Oli Oli - Tamil Alternative Music Festival"}
+                    </p>
+                    <Image
+                      src={Assets.checked}
+                      alt={item.username}
+                      width={20}
+                      height={20}
+                    />
+                  </div>
+                  <p className="flex  gap-2 py-2 text-sm text-gray-500">
+                    <Image
+                      src={Assets.checked}
+                      alt={item.username}
+                      width={20}
+                      height={20}
+                    />
+                    Coimbatore
+                  </p>
+                  <p className="flex  gap-2 py-2 text-sm text-gray-500">
+                    <Image
+                      src={Assets.checked}
+                      alt={item.username}
+                      width={20}
+                      height={20}
+                    />
+                    Feb 20,25 10:30 a.m. Nov 30,24 2:39 p.m.
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
 
-      <div className=" flex items-center justify-center bg-gray-100 pt-5">
+          <div className="mt-6 w-full md:mt-0 md:w-1/4 md:pl-3">
+            <p className="text-lg font-semibold">{"Event Activity"}</p>
+            {activity.map((item) => (
+              <div key={item.id} className="mb-4 flex items-center space-x-4">
+                <Image
+                  src={item.image}
+                  alt={"item.username"}
+                  width={48}
+                  height={48}
+                  className="rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-medium">{item.description}</p>
+                  <p className="text-sm text-gray-500">{item.time}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className=" flex items-center justify-center bg-gray-100 pt-5">
         <div className="w-full max-w-3xl rounded-lg bg-white p-8 shadow-lg">
           <h2 className="mb-6 text-center text-3xl font-bold">Create Event</h2>
 
@@ -709,6 +856,7 @@ export default function Index() {
           </form>
         </div>
       </div>
+      )}
     </div>
   );
 }
