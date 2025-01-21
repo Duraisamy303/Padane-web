@@ -37,6 +37,7 @@ export default function Home() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/my-events", label: "My Events" },
+    { href: "/event-inbox", label: "Event Inbox" },
     { href: "/chatbox", label: "Chatbox" },
     { href: "/my-profile", label: "My Profile" },
     { href: "/my-network", label: "My Network" },
