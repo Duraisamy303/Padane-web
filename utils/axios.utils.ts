@@ -2,12 +2,16 @@ import axios from 'axios';
 
 export const instance = () => {
   const data = axios.create({
-    baseURL: "http://143.110.245.135/api/",
+    baseURL: "http://127.0.0.1:8000/api/",
   });
 
   data.interceptors.request.use(async function (config) {
  
-      config.headers['authorization'] = `Token 17a9da391f65e0ef8440f750e54cbc79cbae3a4c`;
+      // config.headers['authorization'] = `Token ${accessToken}`;
+      const accessToken = localStorage.getItem('token');
+      if (accessToken) {
+        config.headers['authorization'] = `Token ${accessToken}`;
+      }
     return config;
   });
 

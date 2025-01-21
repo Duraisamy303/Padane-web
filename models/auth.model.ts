@@ -2,11 +2,13 @@ import instance from '@/utils/axios.utils';
 
 const auth = {
     login: (data) => {
+        console.log("data: ", data);
         let promise = new Promise((resolve, reject) => {
-            let url = `accounts/login/`;
+            let url = `login/`;
             instance()
                 .post(url, data)
                 .then((res) => {
+                    console.log("login: ", res);
                     resolve(res.data);
                 })
                 .catch((error) => {
