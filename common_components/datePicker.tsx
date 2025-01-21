@@ -27,12 +27,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start text-left font-normal",
+            "w-full justify-start text-left font-normal gap-3",
             !selectedDate && "text-muted-foreground"
           )}
         >
           <CalendarIcon height={20} width={20} />
-          {selectedDate ? format(selectedDate, "PPP") : <span className="pl-5">{placeholder}</span>}
+          {selectedDate ? format(selectedDate, "PPP") : <span >{placeholder}</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">

@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react';
 import moment from 'moment';
 
@@ -75,8 +76,6 @@ export const capitalizeFLetter = (string = '') => {
     }
     return string;
 };
-
-
 
 
 export const objIsEmpty = (obj: object) => {
