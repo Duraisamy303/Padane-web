@@ -17,19 +17,16 @@ interface SidebarProps {
   items?: { label: string; icon?: React.ReactNode; href: string }[];
   className?: string;
   onSelectCategory?: (category: string) => void;
-  ontoggle:any
+  ontoggle: any;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   onSelectCategory = () => {}, // Default function to prevent errors
   className,
-  ontoggle
-  
-  
+  ontoggle,
 }) => {
-
   console.log(ontoggle);
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("received");
 
@@ -72,63 +69,64 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </button> */}
 
       {/* Sidebar */}
-     
+
       <aside
         className={cn(
-         "h-screen w-64 2xl:w-64  xl:w-32 lg:w-32  md:w-64 bg-gray-800 lg:bg-transparent text-white lg:text-black  space-y-6  fixed  lg-top-none left-0 z-40 transform transition-transform lg:translate-x-0",
-         ontoggle ? "translate-x-0" : "-translate-x-full",
-          className
+          "lg-top-none fixed left-0  z-40 h-screen  w-64 transform space-y-6 bg-gray-800 text-white  transition-transform  md:w-64  lg:w-32 lg:translate-x-0 lg:bg-transparent lg:text-black xl:w-32 2xl:w-64",
+          ontoggle ? "translate-x-0" : "-translate-x-full",
+          className,
         )}
       >
         <nav className="px-4 py-6">
-          <h2 className="text-xl font-semibold mb-4">Categories</h2>
+          <h2 className="mb-4 text-xl font-semibold">Categories</h2>
           <div className="mt-6">
             <h3 className="text-lg font-medium text-gray-400">Invitation</h3>
             <ul className="mt-2 space-y-2">
               {invitation.map((item) => (
                 <li
                   key={item.id}
-                  className={`flex items-center space-x-4 p-2 rounded-md hover:bg-gray-700 cursor-pointer ${
+                  className={`flex cursor-pointer items-center space-x-4 rounded-md p-2  ${
                     selectedCategory === item.name ? "bg-gray-700" : ""
                   }`}
                   onClick={() => handleCategoryClick(item.name)}
                 >
                   <span className="text-gray-400">{item.icon}</span>
-                  <span className="lg:text-black hover:text-white">{item.name}</span>
+                  <span className="hover:text-white lg:text-black">
+                    {item.name}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-400 mt-5">Interest</h3>
+            <h3 className="mt-5 text-lg font-medium text-gray-400">Interest</h3>
             <ul className="mt-2 space-y-2">
               {interest.map((item) => (
                 <li
                   key={item.id}
-                  className={`flex items-center space-x-4 p-2 rounded-md hover:bg-gray-700  cursor-pointer 
-                    ${
-                    selectedCategory === item.name ? "bg-gray-700" : "" }
+                  className={`flex cursor-pointer items-center space-x-4 rounded-md p-2  
+                    ${selectedCategory === item.name ? "bg-gray-700" : ""}
                     `}
                   onClick={() => handleCategoryClick(item.name)}
                 >
                   <span className="text-gray-400">{item.icon}</span>
-                  <span className="lg:text-black  hover:text-white">{item.name}</span>
+                  <span className="hover:text-white  lg:text-black">
+                    {item.name}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
-        
         </nav>
       </aside>
 
       {/* Overlay for Mobile */}
       {ontoggle && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          className="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
         />
       )}
     </>
   );
 };
-
