@@ -25,6 +25,18 @@ export default function Index() {
   };
 
 
+  const [selectedChat, setChatCategory] = useState();
+  const handleChatSelection = (chat) => {
+    setChatCategory(chat); // Update the state with the selected category
+  };
+
+  const [toggle, setToggle] = useState(false);
+  const ontoggle = (isOpen) => {
+    setToggle(!isOpen); // Update the state with the selected category
+  };
+
+console.log(selectedChat);
+
  
   return (
     <div className="h-screen w-full flex flex-col">
@@ -34,27 +46,28 @@ export default function Index() {
     </div>
 
     {/* Main Content: Sidebar, TabSection, and ChatOption */}
-    <div className="flex flex-wrap w-full h-full">
+    <div className="flex align-start flex-wrap w-full ">
 
           {/* Sidebar */}
           {/* <div className="hidden lg:block lg:w-1/6" style={{ border: "1px solid grey" }}> */}
-          <div className=" lg:w-1/6" style={{ border: "1px solid grey" }}>
+          <div className="lg:w-1/6" >
             {/* <Sidebar onSelectCategory={handleCategorySelection} /> */}
-            <Sidebar  onSelectCategory={handleCategorySelection} />
+            <Sidebar  onSelectCategory={handleCategorySelection} ontoggle= {toggle}/>
           </div>
 
 
 
           {/* TabSection */}
-          <div className="w-full lg:w-2/6" style={{ border: "1px solid grey" }}>
+          <div className="w-full lg:w-2/6" >
           
-            <TabSection selectedCategory={selectedCategory} />
+            <TabSection selectedCategory={selectedCategory} onSelectChat={handleChatSelection} ontoggle={ontoggle}/>
           </div>
 
           {/* ChatOption */}
-          <div className=" w-full lg:w-3/6 border-t border-gray-500" >
+          <div className={` w-full lg:w-3/6 border-t border-gray-500 ${selectedChat ? "block" : "hidden"}` }>
             {/* <ChatOption /> */}
-            <ChatOption/>
+             <ChatOption onSelectChat={selectedChat}/> 
+          
           </div>
     </div>
 
