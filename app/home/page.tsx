@@ -1,7 +1,15 @@
 "use client";
 import Category_cart from "@/components/Category_cart";
 import Event_cart from "@/components/Event_cart";
-import { Airplay, Activity, Heart, Cpu, Palette, Gamepad2, Dribbble } from "lucide-react";
+import {
+  Airplay,
+  Activity,
+  Heart,
+  Cpu,
+  Palette,
+  Gamepad2,
+  Dribbble,
+} from "lucide-react";
 
 import Assets from "@/imports/assets.import";
 import {
@@ -13,6 +21,7 @@ import {
 import moment from "moment";
 import Image from "next/image";
 import React from "react";
+import Meets_up from "@/components/Meets_up";
 
 export default function Home() {
   const nearEvent = [
@@ -85,27 +94,27 @@ export default function Home() {
     },
     {
       name: "Social Activities",
-      icon: <Activity className="h-6 w-6" />, 
+      icon: <Activity className="h-6 w-6" />,
     },
     {
       name: "Hobbies",
-      icon: <Palette className="h-6 w-6" />, 
+      icon: <Palette className="h-6 w-6" />,
     },
     {
       name: "Sports",
-      icon: <Dribbble className="h-6 w-6" />, 
+      icon: <Dribbble className="h-6 w-6" />,
     },
     {
       name: "Health",
-      icon: <Heart className="h-6 w-6" />, 
+      icon: <Heart className="h-6 w-6" />,
     },
     {
       name: "Technology",
-      icon: <Cpu className="h-6 w-6" />, 
+      icon: <Cpu className="h-6 w-6" />,
     },
     {
       name: "Art and Culture",
-      icon: <Palette className="h-6 w-6" />, 
+      icon: <Palette className="h-6 w-6" />,
     },
     {
       name: "Games",
@@ -113,11 +122,27 @@ export default function Home() {
     },
   ];
 
+  const meetup = [
+    {
+      title: "Discover events and groups",
+      ion: "",
+      subTitle: "See who's hosting local events for all the things you love",
+      links: "Search events and groups",
+    },
+    {
+      title: "Start a group to host events",
+      ion: "",
+      subTitle:
+        "Create your own Meetup group, and draw from a community of millions",
+      links: "Start a group",
+    },
+  ];
+
   return (
     <div className="md:p-20">
       {/* Top Section */}
-      <div className="flex w-full flex-col md:flex-row">
-        <div className="mb-8 flex w-full items-center justify-center md:mb-0 md:w-1/2">
+      <div className="flex w-full flex-col items-center md:flex-row md:space-x-8">
+        <div className="mb-8 flex w-full items-center justify-center md:w-1/2">
           <div className="px-4 py-4 text-center md:text-left">
             <h1 className="mb-4 text-[30px] font-extrabold md:text-[40px]">
               The people platform—Where interests become friendships
@@ -128,7 +153,7 @@ export default function Home() {
               Meetup. Events are happening every day—sign up to join the fun.
             </p>
             <button className="rounded-lg bg-blue-500 px-6 py-2 text-white transition duration-300 hover:bg-blue-700">
-              Join meetup
+              Join Meetup
             </button>
           </div>
         </div>
@@ -136,13 +161,23 @@ export default function Home() {
         <div className="flex w-full items-center justify-center md:w-1/2">
           <Image
             src={Assets.mobile_ping_1}
-            alt="Placeholder Image"
+            alt="Mobile Ping Image"
             className="max-h-full max-w-full object-contain"
           />
         </div>
       </div>
-
       <div className="md:pt-10">
+        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+          Events near
+        </h1>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {nearEvent.map((item, index) => (
+            <Event_cart key={index} item={item} />
+          ))}
+        </div>
+      </div>
+
+      {/* <div className="md:pt-10 ">
         <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
           Events near
         </h1>
@@ -152,7 +187,8 @@ export default function Home() {
             <Event_cart item={item} index={index} />
           ))}
         </div>
-      </div>
+      </div> */}
+    
 
       <div className="md:pt-10">
         <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
@@ -173,6 +209,18 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-8">
           {category.map((item, index) => (
             <Category_cart item={item} index={index} />
+          ))}
+        </div>
+      </div>
+
+      <div className="md:pt-10">
+        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+          How Meetup works
+        </h1>
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+          {meetup.map((item, index) => (
+            <Meets_up key={index} item={item} index={index} />
           ))}
         </div>
       </div>
