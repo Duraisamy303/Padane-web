@@ -28,14 +28,12 @@ import {
 import { EditIcon, EyeIcon, MapPin, View, ViewIcon } from "lucide-react";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import TabSection from "./Tabs";
+import ProfileTabs from "./ProfileTabs";
+import RecommentedPeopleList from "./RecommentedPeopleList";
+import RecentFollowersList from "./RecentFollowersList";
 import Headers from "./Header";
-import EventOrganizer from "./EventOrganizer";
-// import RecommentedPeopleList from "./RecommentedPeopleList";
-// import RecentFollowersList from "./RecentFollowersList";
 
-
-const Layout = () => {
+const ProfileLayout = () => {
   return (
     <div className=" max-w-full">
       <div className="container mx-auto max-w-[1200px]">
@@ -50,16 +48,16 @@ const Layout = () => {
         <div className="block justify-between md:flex md:space-x-4">
           {/* Left Column */}
           <div className="mb-4 w-full md:mb-0 md:w-3/4">
-            <TabSection />
+            <ProfileTabs />
           </div>
           {/* Right Column */}
           <div className="w-full md:w-1/4">
             <div>
-              <EventOrganizer />
+              <RecommentedPeopleList />
             </div>
-            {/* <div className="mt-4">
+            <div className="mt-4">
               <RecentFollowersList />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -67,4 +65,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default ProfileLayout;

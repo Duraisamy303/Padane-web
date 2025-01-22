@@ -25,14 +25,7 @@ import {
   RecommentedPeoples,
   skills,
 } from "@/utils/constant.utils";
-import {
-  EditIcon,
-  EyeIcon,
-  MapPin,
-  Trash2,
-  View,
-  ViewIcon,
-} from "lucide-react";
+import { EditIcon, EyeIcon, MapPin, Trash2, View, ViewIcon } from "lucide-react";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
@@ -44,13 +37,8 @@ const ProfileTabs = () => {
 
   return (
     <div className=" max-w-full">
-      <Tabs defaultValue="aboutme" className="w-full">
-        <TabsList
-          className="overflow-y- sticky top-0 z-10 flex w-full justify-between gap-4  overflow-x-auto bg-gray-100 md:justify-between"
-          aria-label="tabs"
-        >
-          <TabsTrigger value="aboutme">About Me</TabsTrigger>
-          <TabsTrigger value="posts">Recent Posts</TabsTrigger>
+      <Tabs defaultValue="skills" className="w-full">
+        <TabsList className="sticky top-0 z-10 flex w-full justify-between md:justify-between gap-4  bg-gray-100 overflow-x-auto overflow-y-" aria-label="tabs">
           <TabsTrigger value="skills">Skills</TabsTrigger>
           <TabsTrigger value="awards">Awards</TabsTrigger>
           <TabsTrigger value="keyformer">Performers</TabsTrigger>
@@ -59,90 +47,6 @@ const ProfileTabs = () => {
           <TabsTrigger value="highlight">Highlight</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="aboutme">
-          <Card>
-            <CardHeader className="flex flex-row justify-between">
-              <div className="w-3/4 space-y-1">
-                <CardTitle>About Me</CardTitle>
-                <CardDescription>Write about yourself here.</CardDescription>
-              </div>
-              {/* <div className="mt-0 flex w-1/4 justify-end">
-                <Button variant="outline">
-                  <PlusIcon className="h-4 w-4" />
-                </Button>
-              </div> */}
-            </CardHeader>
-            <CardContent className="w-full">
-              <div>
-                <p>
-                  About us content here Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. officiis ipsum dolorem voluptatem facilis
-                  aspernatur voluptas voluptate saepe doloremque beatae sunt
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam,
-                  quae.
-                </p>
-                <p className="mt-3">
-                  About us content here Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. officiis ipsum dolorem voluptatem facilis
-                  aspernatur voluptas voluptate saepe doloremque beatae sunt
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam,
-                  quae.{" "}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="posts">
-          <Card>
-            <CardHeader className="flex flex-row justify-between">
-              <div className="w-3/4 space-y-1">
-                <CardTitle>Recent Posts</CardTitle>
-                <CardDescription>Recent Posts here.</CardDescription>
-              </div>
-              {/* <div className="mt-0 flex w-1/4 justify-end">
-                <Button variant="outline">
-                  <PlusIcon className="h-4 w-4" />
-                </Button>
-              </div> */}
-            </CardHeader>
-            <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
-              {/* List of performer */}
-              {key_performers.map((performer, index) => (
-                <div
-                  key={index}
-                  className="flex  justify-between rounded-md border p-2"
-                >
-                  <div className="flex items-center">
-                    <Avatar className="h-12 w-12 overflow-hidden rounded-full">
-                      <img
-                        src={`https://i.pravatar.cc/150?img=${performer.id}`}
-                        alt={`${performer?.name}'s avatar`}
-                      />
-                    </Avatar>
-                    <div className="ml-2">
-                      <p className="font-medium ">{performer?.name}</p>
-
-                      <span className="text-sm text-gray-500">
-                        {performer?.description}
-                      </span>
-                    </div>
-                  </div>
-                  <Button
-                    variant="outline"
-                    onClick={() => handleEdit(performer?.name)}
-                    className="h-6 w-6 p-1"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
         <TabsContent value="skills">
           <Card>
             <CardHeader className="flex flex-row justify-between">
@@ -150,11 +54,11 @@ const ProfileTabs = () => {
                 <CardTitle>My Skills</CardTitle>
                 <CardDescription>Add your skills here.</CardDescription>
               </div>
-              <div className="mt-0 flex w-1/4 justify-end">
+              {/* <div className="mt-0 flex w-1/4 justify-end">
                 <Button variant="outline">
                   <PlusIcon className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
               {/* List of Skills */}
@@ -164,13 +68,13 @@ const ProfileTabs = () => {
                   className="flex justify-between rounded-md border p-2 hover:bg-gray-100"
                 >
                   <span className="font-medium">{skill}</span>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     onClick={() => handleEdit(skill)}
                     className="h-6 w-6 p-1"
                   >
                     <Pencil1Icon className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               ))}
             </CardContent>
@@ -184,11 +88,11 @@ const ProfileTabs = () => {
                 <CardTitle>My Awards</CardTitle>
                 <CardDescription>Add your awards here.</CardDescription>
               </div>
-              <div className="mt-0 flex w-1/4 justify-end">
+              {/* <div className="mt-0 flex w-1/4 justify-end">
                 <Button variant="outline">
                   <PlusIcon className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
               {/* List of Awards */}
@@ -206,13 +110,13 @@ const ProfileTabs = () => {
                     </Avatar>
                     <span className="ml-2 font-medium">{award?.name}</span>
                   </div>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     onClick={() => handleEdit(award?.name)}
                     className="h-6 w-6 p-1"
                   >
                     <Pencil1Icon className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               ))}
             </CardContent>
@@ -226,11 +130,11 @@ const ProfileTabs = () => {
                 <CardTitle>Our Key Performers</CardTitle>
                 <CardDescription>Add our key performers here.</CardDescription>
               </div>
-              <div className="mt-0 flex w-1/4 justify-end">
+              {/* <div className="mt-0 flex w-1/4 justify-end">
                 <Button variant="outline">
                   <PlusIcon className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
               {/* List of performer */}
@@ -254,13 +158,13 @@ const ProfileTabs = () => {
                       </span>
                     </div>
                   </div>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     onClick={() => handleEdit(performer?.name)}
                     className="h-6 w-6 p-1"
                   >
                     <Trash2 className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               ))}
             </CardContent>
@@ -274,11 +178,11 @@ const ProfileTabs = () => {
                 <CardTitle>Association With My Music Schools</CardTitle>
                 <CardDescription>Add your music schools here.</CardDescription>
               </div>
-              <div className="mt-0 flex w-1/4 justify-end">
+              {/* <div className="mt-0 flex w-1/4 justify-end">
                 <Button variant="outline">
                   <PlusIcon className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
               {/* List of school */}
@@ -298,13 +202,13 @@ const ProfileTabs = () => {
                     <p className="font-medium ">{school?.name}</p>
                   </div>
                   {/* </div> */}
-                  <Button
+                  {/* <Button
                     variant="outline"
                     onClick={() => handleEdit(school?.name)}
                     className="h-6 w-6 p-1"
                   >
                     <Pencil1Icon className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               ))}
             </CardContent>
@@ -318,11 +222,11 @@ const ProfileTabs = () => {
                 <CardTitle>Association With My Music Band</CardTitle>
                 <CardDescription>Add your music band here.</CardDescription>
               </div>
-              <div className="mt-0 flex w-1/4 justify-end">
+              {/* <div className="mt-0 flex w-1/4 justify-end">
                 <Button variant="outline">
                   <PlusIcon className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
               {/* List of band */}
@@ -342,13 +246,13 @@ const ProfileTabs = () => {
                     <p className="font-medium ">{band?.name}</p>
                   </div>
                   {/* </div> */}
-                  <Button
+                  {/* <Button
                     variant="outline"
                     onClick={() => handleEdit(band?.name)}
                     className="h-6 w-6 p-1"
                   >
                     <Pencil1Icon className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               ))}
             </CardContent>
@@ -362,11 +266,11 @@ const ProfileTabs = () => {
                 <CardTitle>Highlights</CardTitle>
                 <CardDescription>Add your highlights here.</CardDescription>
               </div>
-              <div className="mt-0 flex w-1/4 justify-end">
+              {/* <div className="mt-0 flex w-1/4 justify-end">
                 <Button variant="outline">
                   <PlusIcon className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
               {/* List of Skills */}
@@ -386,13 +290,13 @@ const ProfileTabs = () => {
                       </a>
                     </Button>
                   </div>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     onClick={() => handleEdit(heighlight?.name)}
                     className="h-6 w-6 p-1"
                   >
                     <Pencil1Icon className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               ))}
             </CardContent>

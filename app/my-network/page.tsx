@@ -53,14 +53,27 @@ const sampleData = [
     following: 100,
   },
   {
-    id: 6,
+    id: 7,
     avatar: Assets.mobile_ping_1,
     username: "User 6",
     followers: 90,
     following: 100,
   },
   {
-    id: 6,
+    id: 8,
+    avatar: Assets.mobile_ping_1,
+    username: "User 6",
+    followers: 90,
+    following: 100,
+  },
+  {
+    id: 9,
+    avatar: Assets.mobile_ping_1,
+    username: "User 6",
+    followers: 90,
+    following: 100,
+  }, {
+    id: 10,
     avatar: Assets.mobile_ping_1,
     username: "User 6",
     followers: 90,
@@ -106,7 +119,7 @@ export default function Index() {
       />
 
         <div className="p-4">
-          <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-4 lg:px-20">
+          <div className="grid grid-cols-1 gap-3 px-4 sm:grid-cols-2 lg:grid-cols-5 lg:px-20">
             {sampleData.map((item) => (
               <User_cart item={item} />
             ))}

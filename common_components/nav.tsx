@@ -18,6 +18,8 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { ModeToggle } from "@/components/theme-toggle";
+import Image from "next/image";
+import Assets from "@/imports/assets.import";
 
 export default function Home() {
   const textTest = "shbds";
@@ -45,15 +47,21 @@ export default function Home() {
 
   return (
     <div>
-      <header className="w-full bg-white shadow dark:bg-gray-900">
-        <nav className="flex items-center justify-between px-4 py-2 md:px-8">
+      <header className="w-full bg-white shadow dark:bg-gray-900 sticky top-0 z-10 ">
+        <nav className="flex items-center justify-between px-4 py-2 md:px-8 sticky top-0 z-10">
           <div className="flex items-center">
             <Link href="/" className="text-lg font-bold text-primary">
-              LOGO
+              <Image
+                src={Assets.padane}
+                alt="logo"
+                height={80}
+                width={80}
+                className=""
+              />
             </Link>
           </div>
 
-          <div className="hidden gap-6 md:flex">
+          <div className="hidden gap-6 lg:flex">
             {navLinks.map((link) => (
               <NavLink key={link.label} href={link.href} label={link.label} />
             ))}
@@ -106,7 +114,7 @@ export default function Home() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={toggleSidebar}
             >
               {isSidebarOpen ? (
