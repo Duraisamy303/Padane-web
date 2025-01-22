@@ -21,7 +21,7 @@ import React from "react";
 export default function Event_cart(props: any) {
   const { item, index } = props;
   return (
-    <Card key={index} className="mx-auto w-full max-w-sm border-none p-0">
+    <Card key={index} className="w-full border rounded-lg shadow-sm overflow-hidden ">
       <CardHeader className="border-none p-0">
         <img
           src={item.image}

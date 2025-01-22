@@ -139,7 +139,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="md:p-20">
+    <div className="md:p-20 container">
       {/* Top Section */}
       <div className="flex w-full flex-col items-center md:flex-row md:space-x-8">
         <div className="mb-8 flex w-full items-center justify-center md:w-1/2">
@@ -166,10 +166,11 @@ export default function Home() {
           />
         </div>
       </div>
+
       <div className="md:pt-10">
         <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
           Events near
-        </h1>
+        </h1> 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {nearEvent.map((item, index) => (
             <Event_cart key={index} item={item} />
@@ -201,6 +202,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+
       <div className="md:pt-10">
         <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
           Explore top categories
