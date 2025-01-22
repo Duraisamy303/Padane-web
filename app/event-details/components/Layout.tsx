@@ -30,6 +30,7 @@ import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import TabSection from "./Tabs";
 import Headers from "./Header";
+import EventOrganizer from "./EventOrganizer";
 // import RecommentedPeopleList from "./RecommentedPeopleList";
 // import RecentFollowersList from "./RecentFollowersList";
 
@@ -53,10 +54,10 @@ const Layout = () => {
           </div>
           {/* Right Column */}
           <div className="w-full md:w-1/4">
-            {/* <div>
-              <RecommentedPeopleList />
+            <div>
+              <EventOrganizer />
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <RecentFollowersList />
             </div> */}
           </div>
