@@ -47,8 +47,8 @@ export default function Home() {
 
   return (
     <div>
-      <header className="w-full bg-white shadow dark:bg-gray-900">
-        <nav className="flex items-center justify-between px-4 py-2 md:px-8">
+      <header className="w-full bg-white shadow dark:bg-gray-900 sticky top-0 z-10 ">
+        <nav className="flex items-center justify-between px-4 py-2 md:px-8 sticky top-0 z-10">
           <div className="flex items-center">
             <Link href="/" className="text-lg font-bold text-primary">
               <Image

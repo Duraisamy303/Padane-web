@@ -1,0 +1,181 @@
+"use client";
+import Category_cart from "@/components/Category_cart";
+import Event_cart from "@/components/Event_cart";
+import { Airplay, Activity, Heart, Cpu, Palette, Gamepad2, Dribbble } from "lucide-react";
+
+import Assets from "@/imports/assets.import";
+import {
+  CalendarDays,
+  MessageSquareHeart,
+  ThumbsUp,
+  UserRoundPlus,
+} from "lucide-react";
+import moment from "moment";
+import Image from "next/image";
+import React from "react";
+
+export default function Home() {
+  const nearEvent = [
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+  ];
+
+  const category = [
+    {
+      name: "Travel",
+      icon: <Airplay className="h-6 w-6" />,
+    },
+    {
+      name: "Social Activities",
+      icon: <Activity className="h-6 w-6" />, 
+    },
+    {
+      name: "Hobbies",
+      icon: <Palette className="h-6 w-6" />, 
+    },
+    {
+      name: "Sports",
+      icon: <Dribbble className="h-6 w-6" />, 
+    },
+    {
+      name: "Health",
+      icon: <Heart className="h-6 w-6" />, 
+    },
+    {
+      name: "Technology",
+      icon: <Cpu className="h-6 w-6" />, 
+    },
+    {
+      name: "Art and Culture",
+      icon: <Palette className="h-6 w-6" />, 
+    },
+    {
+      name: "Games",
+      icon: <Gamepad2 className="h-6 w-6" />,
+    },
+  ];
+
+  return (
+    <div className="md:p-20">
+      {/* Top Section */}
+      <div className="flex w-full flex-col md:flex-row">
+        <div className="mb-8 flex w-full items-center justify-center md:mb-0 md:w-1/2">
+          <div className="px-4 py-4 text-center md:text-left">
+            <h1 className="mb-4 text-[30px] font-extrabold md:text-[40px]">
+              The people platform—Where interests become friendships
+            </h1>
+            <p className="mb-6 text-lg md:text-xl">
+              Whatever your interest, from hiking and reading to networking and
+              skill sharing, there are thousands of people who share it on
+              Meetup. Events are happening every day—sign up to join the fun.
+            </p>
+            <button className="rounded-lg bg-blue-500 px-6 py-2 text-white transition duration-300 hover:bg-blue-700">
+              Join meetup
+            </button>
+          </div>
+        </div>
+
+        <div className="flex w-full items-center justify-center md:w-1/2">
+          <Image
+            src={Assets.mobile_ping_1}
+            alt="Placeholder Image"
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+      </div>
+
+      <div className="md:pt-10">
+        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+          Events near
+        </h1>
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {nearEvent.map((item, index) => (
+            <Event_cart item={item} index={index} />
+          ))}
+        </div>
+      </div>
+
+      <div className="md:pt-10">
+        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+          Upcoming online events
+        </h1>
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {nearEvent.map((item, index) => (
+            <Event_cart item={item} index={index} />
+          ))}
+        </div>
+      </div>
+      <div className="md:pt-10">
+        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+          Explore top categories
+        </h1>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-8">
+          {category.map((item, index) => (
+            <Category_cart item={item} index={index} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
