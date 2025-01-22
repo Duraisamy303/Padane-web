@@ -18,6 +18,8 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { ModeToggle } from "@/components/theme-toggle";
+import Image from "next/image";
+import Assets from "@/imports/assets.import";
 
 export default function Home() {
   const textTest = "shbds";
@@ -49,7 +51,13 @@ export default function Home() {
         <nav className="flex items-center justify-between px-4 py-2 md:px-8">
           <div className="flex items-center">
             <Link href="/" className="text-lg font-bold text-primary">
-              LOGO
+              <Image
+                src={Assets.padane}
+                alt="logo"
+                height={80}
+                width={80}
+                className=""
+              />
             </Link>
           </div>
 
