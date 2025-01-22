@@ -1,17 +1,14 @@
 "use client";
 import Navbar from "@/common_components/nav";
 import React, { useState } from "react";
-import Link from "next/link";
-import * as Dialog from "@radix-ui/react-dialog";
-
-
-import Menu from "@/common_components/menu";
-// import Sidebar from "@/app/examples/music/components/sidebar";
 import { useSetState } from "@/utils/functions.utils";
-import Sidebar from "./components/sidebar";
-import { MailIcon } from "lucide-react";
+// import Sidebar from "./components/sidebar";
+
+import { HomeIcon, MailIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { TabSection } from "./components/tabs";
 import ChatOption from "./components/chatbox";
+import { playlists } from "./data/menu";
+import { Sidebar } from "./components/sidebar-copy";
 
 
 
@@ -21,13 +18,6 @@ export default function Index() {
     acitveTab:0
   })
 
-
-
-  // const [selectedCategory, setSelectedCategory] = useState<string>("Received");
-  // const handleSelectCategory = (category: string) => {
-  //   setSelectedCategory(category);
-  // };
-
   const [selectedCategory, setSelectedCategory] = useState("received");
 
   const handleCategorySelection = (category) => {
@@ -35,7 +25,7 @@ export default function Index() {
   };
 
 
-
+ 
   return (
     <div className="h-screen w-full flex flex-col">
     {/* Navbar */}
@@ -45,22 +35,28 @@ export default function Index() {
 
     {/* Main Content: Sidebar, TabSection, and ChatOption */}
     <div className="flex flex-wrap w-full h-full">
-  {/* Sidebar */}
-  <div className="hidden lg:block lg:w-1/6" style={{ border: "1px solid grey" }}>
-    <Sidebar onSelectCategory={handleCategorySelection} />
-  </div>
 
-  {/* TabSection */}
-  <div className="w-full lg:w-2/6" style={{ border: "1px solid grey" }}>
-    <TabSection selectedCategory={selectedCategory} />
-  </div>
+          {/* Sidebar */}
+          {/* <div className="hidden lg:block lg:w-1/6" style={{ border: "1px solid grey" }}> */}
+          <div className=" lg:w-1/6" style={{ border: "1px solid grey" }}>
+            {/* <Sidebar onSelectCategory={handleCategorySelection} /> */}
+            <Sidebar  onSelectCategory={handleCategorySelection} />
+          </div>
 
-  {/* ChatOption */}
-  <div className=" w-full lg:w-3/6 border-t border-gray-500" >
-    {/* <ChatOption /> */}
-    <ChatOption/>
-  </div>
-</div>
+
+
+          {/* TabSection */}
+          <div className="w-full lg:w-2/6" style={{ border: "1px solid grey" }}>
+          
+            <TabSection selectedCategory={selectedCategory} />
+          </div>
+
+          {/* ChatOption */}
+          <div className=" w-full lg:w-3/6 border-t border-gray-500" >
+            {/* <ChatOption /> */}
+            <ChatOption/>
+          </div>
+    </div>
 
   </div>
   
