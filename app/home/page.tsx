@@ -140,7 +140,6 @@ export default function Home() {
 
   return (
     <div className="container md:p-20">
-      {/* Top Section */}
       <div className="flex w-full flex-col items-center md:flex-row md:space-x-8">
         <div className="mb-8 flex w-full items-center justify-center md:w-1/2">
           <div className="px-4 py-4 text-center md:text-left">
@@ -168,7 +167,7 @@ export default function Home() {
       </div>
 
       <div className="md:pt-10">
-        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+        <h1 className="mb-4 text-[30px] font-semibold md:text-[30px]">
           Events near
         </h1>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -177,21 +176,8 @@ export default function Home() {
           ))}
         </div>
       </div>
-
-      {/* <div className="md:pt-10 ">
-        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
-          Events near
-        </h1>
-
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {nearEvent.map((item, index) => (
-            <Event_cart item={item} index={index} />
-          ))}
-        </div>
-      </div> */}
-
       <div className="md:pt-10">
-        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+        <h1 className="mb-4 text-[30px] font-semibold md:text-[30px]">
           Upcoming online events
         </h1>
 
@@ -203,7 +189,7 @@ export default function Home() {
       </div>
 
       <div className="pt-5 ">
-        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+        <h1 className="mb-4 text-[30px] font-semibold md:text-[30px]">
           Explore top categories
         </h1>
 
@@ -215,7 +201,7 @@ export default function Home() {
       </div>
 
       <div className="pt-5 ">
-        <h1 className="mb-4 text-[30px] font-bold md:text-[30px]">
+        <h1 className="mb-4 text-[30px] font-semibold md:text-[30px]">
           How Meetup works
         </h1>
 
