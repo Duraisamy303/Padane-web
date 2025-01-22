@@ -25,7 +25,14 @@ import {
   RecommentedPeoples,
   skills,
 } from "@/utils/constant.utils";
-import { EditIcon, EyeIcon, MapPin, Trash2, View, ViewIcon } from "lucide-react";
+import {
+  EditIcon,
+  EyeIcon,
+  MapPin,
+  Trash2,
+  View,
+  ViewIcon,
+} from "lucide-react";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
@@ -37,8 +44,13 @@ const ProfileTabs = () => {
 
   return (
     <div className=" max-w-full">
-      <Tabs defaultValue="skills" className="w-full">
-        <TabsList className="sticky top-0 z-10 flex w-full justify-between md:justify-between gap-4  bg-gray-100 overflow-x-auto overflow-y-" aria-label="tabs">
+      <Tabs defaultValue="aboutme" className="w-full">
+        <TabsList
+          className="overflow-y- sticky top-0 z-10 flex w-full justify-between gap-4  overflow-x-auto bg-gray-100 md:justify-between"
+          aria-label="tabs"
+        >
+          <TabsTrigger value="aboutme">About Me</TabsTrigger>
+          <TabsTrigger value="posts">Recent Posts</TabsTrigger>
           <TabsTrigger value="skills">Skills</TabsTrigger>
           <TabsTrigger value="awards">Awards</TabsTrigger>
           <TabsTrigger value="keyformer">Performers</TabsTrigger>
@@ -46,6 +58,90 @@ const ProfileTabs = () => {
           <TabsTrigger value="musicband">Music Band</TabsTrigger>
           <TabsTrigger value="highlight">Highlight</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="aboutme">
+          <Card>
+            <CardHeader className="flex flex-row justify-between">
+              <div className="w-3/4 space-y-1">
+                <CardTitle>About Me</CardTitle>
+                <CardDescription>Write about yourself here.</CardDescription>
+              </div>
+              {/* <div className="mt-0 flex w-1/4 justify-end">
+                <Button variant="outline">
+                  <PlusIcon className="h-4 w-4" />
+                </Button>
+              </div> */}
+            </CardHeader>
+            <CardContent className="w-full">
+              <div>
+                <p>
+                  About us content here Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. officiis ipsum dolorem voluptatem facilis
+                  aspernatur voluptas voluptate saepe doloremque beatae sunt
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam,
+                  quae.
+                </p>
+                <p className="mt-3">
+                  About us content here Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. officiis ipsum dolorem voluptatem facilis
+                  aspernatur voluptas voluptate saepe doloremque beatae sunt
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam,
+                  quae.{" "}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="posts">
+          <Card>
+            <CardHeader className="flex flex-row justify-between">
+              <div className="w-3/4 space-y-1">
+                <CardTitle>Recent Posts</CardTitle>
+                <CardDescription>Recent Posts here.</CardDescription>
+              </div>
+              {/* <div className="mt-0 flex w-1/4 justify-end">
+                <Button variant="outline">
+                  <PlusIcon className="h-4 w-4" />
+                </Button>
+              </div> */}
+            </CardHeader>
+            <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+              {/* List of performer */}
+              {key_performers.map((performer, index) => (
+                <div
+                  key={index}
+                  className="flex  justify-between rounded-md border p-2"
+                >
+                  <div className="flex items-center">
+                    <Avatar className="h-12 w-12 overflow-hidden rounded-full">
+                      <img
+                        src={`https://i.pravatar.cc/150?img=${performer.id}`}
+                        alt={`${performer?.name}'s avatar`}
+                      />
+                    </Avatar>
+                    <div className="ml-2">
+                      <p className="font-medium ">{performer?.name}</p>
+
+                      <span className="text-sm text-gray-500">
+                        {performer?.description}
+                      </span>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={() => handleEdit(performer?.name)}
+                    className="h-6 w-6 p-1"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="skills">
           <Card>

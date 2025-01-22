@@ -215,16 +215,16 @@ const Headers = () => {
                   </PopoverTrigger>
                   <PopoverContent className="w-full">
                     <div className=" flex items-center space-x-4 text-center">
-                      <div className="rounded-full border-2 border-gray-500 p-2">
+                      <div className="rounded-full border-2 border-gray-500 p-1">
                         <FacebookIcon className="h-4 w-4 cursor-pointer" />
                       </div>
-                      <div className="rounded-full border-2 border-gray-500 p-2">
+                      <div className="rounded-full border-2 border-gray-500 p-1">
                         <TwitterIcon className="h-4 w-4 cursor-pointer" />
                       </div>
-                      <div className="rounded-full border-2 border-gray-500 p-2">
+                      <div className="rounded-full border-2 border-gray-500 p-1">
                         <PhoneCallIcon className="h-4 w-4 cursor-pointer" />
                       </div>
-                      <div className="rounded-full border-2 border-gray-500 p-2">
+                      <div className="rounded-full border-2 border-gray-500 p-1">
                         <InstagramIcon className="h-4 w-4 cursor-pointer" />
                       </div>
                     </div>
