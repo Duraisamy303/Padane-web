@@ -22,13 +22,18 @@ import {
   key_performers,
   music_band,
   music_schools,
+  Recent_posts,
   RecommentedPeoples,
   skills,
 } from "@/utils/constant.utils";
 import {
   EditIcon,
   EyeIcon,
+  Heart,
   MapPin,
+  MessageCircle,
+  SendIcon,
+  Share,
   Trash2,
   View,
   ViewIcon,
@@ -109,34 +114,106 @@ const ProfileTabs = () => {
               </div> */}
             </CardHeader>
             <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
-              {/* List of performer */}
-              {key_performers.map((performer, index) => (
+              {/* List of recent_posts */}
+              {Recent_posts.map((recent_posts, index) => (
                 <div
                   key={index}
                   className="flex  justify-between rounded-md border p-2"
                 >
-                  <div className="flex items-center">
-                    <Avatar className="h-12 w-12 overflow-hidden rounded-full">
-                      <img
-                        src={`https://i.pravatar.cc/150?img=${performer.id}`}
-                        alt={`${performer?.name}'s avatar`}
-                      />
-                    </Avatar>
-                    <div className="ml-2">
-                      <p className="font-medium ">{performer?.name}</p>
+                  <div className="w-full">
+                    <div className="flex items-center">
+                      <Avatar className="h-10 w-10 overflow-hidden rounded-full">
+                        <img
+                          src={`https://i.pravatar.cc/150?img=${recent_posts.id}`}
+                          alt={`${recent_posts?.user_name}'s avatar`}
+                        />
+                      </Avatar>
+                      <div className="ml-2">
+                        <p className="font-medium leading-none">
+                          {recent_posts?.user_name}
+                        </p>
 
-                      <span className="text-sm text-gray-500">
-                        {performer?.description}
-                      </span>
+                        <span className="text-xs leading-none text-gray-500">
+                          {recent_posts?.date}, {recent_posts?.time}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="mt-2 font-medium ">{recent_posts?.title}</p>
+                      <p className="mt-0 text-gray-500">
+                        {" "}
+                        {recent_posts?.description}
+                      </p>
+                      <div className="mt-2 h-48 w-full">
+                        <img
+                          src={recent_posts?.image}
+                          alt={recent_posts?.title}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+
+                      <div className="mt-2 flex items-center space-x-2">
+                        <Button
+                          variant="outline"
+                          className="relative border-none "
+                        >
+                          <Heart className="h-6 w-6" />
+                          <p className="absolute right-0 top-0 rounded-full bg-gray-200 px-1 py-1 text-xs font-medium leading-none text-gray-500">
+                            {recent_posts?.like_count > 99
+                              ? "99+"
+                              : recent_posts?.like_count}
+                          </p>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="relative border-none"
+                        >
+                          <MessageCircle className="h-6 w-6" />
+                          <p className="text-md absolute right-0 top-0 rounded-full bg-gray-200 px-2 py-1 font-medium leading-none text-gray-500">
+                            {recent_posts?.comment_count}
+                          </p>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="relative border-none"
+                        >
+                          <SendIcon className="h-6 w-6" />
+                          <p className="text-md absolute right-0 top-0 rounded-full bg-gray-200 px-2 py-1 font-medium leading-none text-gray-500">
+                            0
+                          </p>
+                        </Button>
+                      </div>
+
+                      <div className="mt-2 flex items-center space-x-1">
+                        <div className="flex items-center space-x-[-10px]">
+                          {" "}
+                          {/* Adjust space between images */}
+                          {recent_posts?.liked_users.map((user, index) => (
+                            <Avatar
+                              key={index}
+                              className={`h-7 w-7 overflow-hidden rounded-full ${index === 1 ? "ml-[-10px]" : ""} ${index === 2 ? "ml-[-10px]" : ""}`}
+                            >
+                              <AvatarImage
+                                src={`https://i.pravatar.cc/150?img=${user.id}`}
+                                alt={user?.name}
+                              />
+                            </Avatar>
+                          ))}
+                        </div>
+                        <div>
+                          <p className="text-md font-medium text-gray-500">
+                            Liked by{" "}
+                            {recent_posts?.liked_users.length > 1
+                              ? `${recent_posts?.liked_users[0]?.name} and others`
+                              : recent_posts?.liked_users.map(
+                                  (user, index) => user?.name,
+                                )}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <Button
-                    variant="outline"
-                    onClick={() => handleEdit(performer?.name)}
-                    className="h-6 w-6 p-1"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
                 </div>
               ))}
             </CardContent>

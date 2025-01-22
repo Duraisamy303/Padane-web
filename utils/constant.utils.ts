@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export const ROLE = {
     ADMIN: 'ADMIN',
     BDM: 'BDM',
@@ -108,6 +110,176 @@ export const key_performers = [
     },
     // Add more awards as needed
   ];
+
+  export const Recent_posts = [
+    {
+      id: 1,
+    user_name: "John Doe",
+    date: "Jan 1, 2025",
+    time: "10:00 AM",
+    title: "Marakkuma Nenjam",
+    description: "Check out my latest music release on Spotify!",
+    image: "http://padane.in/media/event_poster/event_8hJeZB9.jpg",
+    like_count: 10,
+    comment_count: 5,
+    share_count: 10,
+    liked: false,
+
+    liked_users: [
+      {
+      id: 1,
+      name: "Jane Smith",
+    },
+    {
+      id: 2,
+      name: "Michael Johnson",
+    },
+    {
+      id: 3,
+      name: "Emily Davis",
+    }
+  ],
+
+    comments: [
+      {
+        id: 1,
+        user_name: "Jane Smith",
+        date: "Jan 1, 2025",
+        time: "10:00 AM",
+        comment: "Great music! I love it!",
+      },
+      {
+
+        id: 2,
+        user_name: "Michael Johnson",
+        date: "Jan 1, 2025",
+        time: "10:00 AM",
+        comment: "I'm glad you enjoyed it!",
+    },
+    {
+      id: 3,
+      user_name: "Emily Davis",
+      date: "Jan 1, 2025",
+      time: "10:00 AM",
+      comment: "Can't wait to hear more from you!",
+    },
+  ],
+  },
+
+  {
+    id: 2,
+    user_name: "Jane Smith",
+    date: "Jan 1, 2025",
+    time: "10:00 AM",
+    title: "New Music Release",
+    description: "Check out my latest music release on Spotify!",
+    image: "http://padane.in/media/event_poster/event_NOhA9vV.jpg",
+    like_count: 100,
+    comment_count: 5,
+    share_count: 10,
+    liked: false,
+
+    liked_users: [
+      {
+      id: 1,
+      name: "Jane Smith",
+    },
+
+    {
+      id: 2,
+      name: "Michael Johnson",
+    },
+    {
+      id: 3,
+      name: "Emily Davis",
+    }
+  ],
+
+
+
+    comments: [
+      {
+        id: 1,
+        user_name: "Jane Smith",
+        date: "Jan 1, 2025",
+        time: "10:00 AM",
+        comment: "Great music! I love it!",
+      },
+      {
+        
+        id: 2,
+        user_name: "Michael Johnson",
+        date: "Jan 1, 2025",
+        time: "10:00 AM",
+        comment: "I'm glad you enjoyed it!",
+    },
+    {
+      id: 3,
+      user_name: "Emily Davis",
+      date: "Jan 1, 2025",
+      time: "10:00 AM",
+      comment: "Can't wait to hear more from you!",
+    },
+  ],
+  },
+
+  {
+    id: 3,
+    user_name: "Michael Johnson",
+    date: "Jan 1, 2025",
+    time: "10:00 AM",
+    title: "New Music Release",
+    description: "Check out my latest music release on Spotify!",
+    image: "http://padane.in/media/event_poster/event_NOhA9vV.jpg",
+    like_count: 100,
+    comment_count: 5,
+    share_count: 10,
+    liked: false,
+
+    liked_users: [
+
+      {
+      id: 1,
+      name: "Jane Smith",
+    },
+    {
+      id: 2,
+      name: "Michael Johnson",
+    },
+    {
+      id: 3,
+      name: "Emily Davis",
+    }
+  ],
+
+    comments: [
+      {
+        id: 1,
+        user_name: "Jane Smith",
+        date: "Jan 1, 2025",
+        time: "10:00 AM",
+        comment: "Great music! I love it!",
+      },
+      {
+        
+        id: 2,
+        user_name: "Michael Johnson",
+        date: "Jan 1, 2025",
+        time: "10:00 AM",
+        comment: "I'm glad you enjoyed it!",
+    },
+    {
+      id: 3,
+      user_name: "Emily Davis",
+      date: "Jan 1, 2025",
+      time: "10:00 AM",
+      comment: "Can't wait to hear more from you!",
+    },
+  ],
+
+    
+  }
+  ]
 
 
   export const music_schools = [
@@ -363,4 +535,74 @@ export const key_performers = [
         },
       ]
 
+
+
+     export const nearEvent = [
+        {
+          image:
+            "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+          name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+          category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+          time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+          invite: 57,
+          interesr: 100,
+          like: 10,
+          event_type: "Offline",
+        },
+        {
+          image:
+            "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+          name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+          category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+          time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+          invite: 57,
+          interesr: 100,
+          like: 10,
+          event_type: "Online",
+        },
+        {
+          image:
+            "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+          name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+          category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+          time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+          invite: 57,
+          interesr: 100,
+          like: 10,
+          event_type: "Offline",
+        },
+        {
+          image:
+            "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+          name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+          category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+          time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+          invite: 57,
+          interesr: 100,
+          like: 10,
+          event_type: "Online",
+        },
+        {
+          image:
+            "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+          name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+          category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+          time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+          invite: 57,
+          interesr: 100,
+          like: 10,
+          event_type: "Offline",
+        },
+        {
+          image:
+            "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+          name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+          category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+          time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+          invite: 57,
+          interesr: 100,
+          like: 10,
+          event_type: "Online",
+        },
+      ];
       
