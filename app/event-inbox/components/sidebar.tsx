@@ -61,7 +61,7 @@ export default function Sidebar({ onSelectCategory }) {
   };
 
   return (
-    <div className=" left-0 top-100 z-50 h-full bg-gray-800 p-4 text-white">
+    <div className=" left-0 top-100 z-50 h-full  p-4">
       <div className="space-y-4">
         <div className="px-4 py-2">
           <Button className="w-full">

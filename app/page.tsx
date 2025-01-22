@@ -11,6 +11,9 @@ import Sidebar from "@/common_components/sidebar";
 import { useSetState } from "@/utils/functions.utils";
 import Combobox from "@/common_components/dropdown";
 import Home from "./home/page";
+import Homes from "./homes/page";
+
+
 
 export default function Index() {
   const [state, setState] = useSetState({
@@ -35,7 +38,7 @@ export default function Index() {
   return (
     <div className="h-screen w-full">
       <Navbar />
-      <Home />
+      <Homes />
     </div>
   );
 }

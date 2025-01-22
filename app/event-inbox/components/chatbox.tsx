@@ -44,7 +44,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const ChatOption = () => {
+const ChatOption = ({onSelectChat}) => {
+  console.log(onSelectChat);
+  
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
   const [message, setMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState(""); // State for the search term
@@ -147,7 +149,7 @@ const ChatOption = () => {
   );
 
   return (
-    <div className="flex max-w-full  flex-col overflow-hidden bg-gray-100 lg:flex-row">
+    <div className={`flex max-w-full  flex-col overflow-hidden bg-gray-100 lg:flex-row ${selectedChat ? "block" : "hidden"}`}>
    
       {/* Right side: Chat Window */}
       <div className="relative mb-4 ml-4 mr-4 mt-4 flex h-[85vh] w-[100%] flex-col rounded-lg bg-white p-4 shadow-md ">
@@ -194,7 +196,7 @@ const ChatOption = () => {
                       />
                     </Avatar>
                     <p className="text-xl font-semibold">
-                      {chats.find((chat) => chat.id === selectedChat)?.name}
+                      {chats.find((chat) => chat.id === onSelectChat)?.name}
                     </p>
                     <p className="text-sm text-gray-500">Band</p>
                     {/* <p className="mt-4 text-gray-400">
@@ -247,13 +249,13 @@ const ChatOption = () => {
 
               <div className="flex flex-col">
                 <p className="text-lg font-medium">
-                  {chats.find((chat) => chat.id === selectedChat)?.name}
+                  {chats.find((chat) => chat.id === onSelectChat)?.name}
                 </p>
                 <p className="text-sm text-gray-500">
                   Last seen{" "}
                   {
-                    chats.find((chat) => chat.id === selectedChat)?.messages[
-                      chats.find((chat) => chat.id === selectedChat)?.messages
+                    chats.find((chat) => chat.id === onSelectChat)?.messages[
+                      chats.find((chat) => chat.id === onSelectChat)?.messages
                         .length - 1
                     ].time
                   }
@@ -282,7 +284,7 @@ const ChatOption = () => {
           {/* {selectedChat !== null ? ( */}
 
           {chats
-            .find((chat) => chat.id === selectedChat)
+            .find((chat) => chat.id === onSelectChat)
             ?.messages.map((msg, idx) => (
               <div
                 key={idx}
