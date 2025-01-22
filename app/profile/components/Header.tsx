@@ -1,4 +1,3 @@
-"use client";
 import { AspectRatio } from "@/components/ui/aspect-radio";
 import Image from "next/image";
 import React from "react";
@@ -26,17 +25,21 @@ import {
   RecommentedPeoples,
   skills,
 } from "@/utils/constant.utils";
-import { EditIcon, EyeIcon, MapPin, View, ViewIcon } from "lucide-react";
+import {
+  EditIcon,
+  EyeIcon,
+  MapPin,
+  MessageCircle,
+  View,
+  ViewIcon,
+} from "lucide-react";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import ProfileTabs from "./ProfileTabs";
 import RecommentedPeopleList from "./RecommentedPeopleList";
 import RecentFollowersList from "./RecentFollowersList";
-import { useRouter } from "next/navigation";
 
 const ProfileLayout = () => {
-  const router = useRouter();
-
   return (
     <div className=" max-w-full">
       <div className=" flex  flex-col gap-4 overflow-hidden py-5 lg:flex-row">
@@ -105,19 +108,18 @@ const ProfileLayout = () => {
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => router.push("/profile")}
                 className="border border-gray-300 text-gray-700 hover:bg-gray-100"
               >
-                <EyeIcon className="h-4 w-4" />
-                <span className="ml-1">View Profile</span>
+                <PlusIcon className="h-4 w-4" />
+                <span className="ml-1">Follow</span>
               </Button>
               <Button
                 size="sm"
                 variant="outline"
                 className="border border-gray-300 text-gray-700 hover:bg-gray-100"
               >
-                <EditIcon className="h-4 w-4" />
-                <span className="ml-2">Edit Profile</span>
+                <MessageCircle className="h-4 w-4" />
+                <span className="ml-2">Message</span>
               </Button>
             </div>
           </div>
