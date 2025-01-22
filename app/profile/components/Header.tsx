@@ -1,4 +1,3 @@
-"use client";
 import { AspectRatio } from "@/components/ui/aspect-radio";
 import Image from "next/image";
 import React from "react";
@@ -29,12 +28,8 @@ import {
 import {
   EditIcon,
   EyeIcon,
-  FacebookIcon,
-  InstagramIcon,
   MapPin,
-  PhoneCallIcon,
-  Share2Icon,
-  TwitterIcon,
+  MessageCircle,
   View,
   ViewIcon,
 } from "lucide-react";
@@ -43,16 +38,8 @@ import { cn } from "@/lib/utils";
 import ProfileTabs from "./ProfileTabs";
 import RecommentedPeopleList from "./RecommentedPeopleList";
 import RecentFollowersList from "./RecentFollowersList";
-import { useRouter } from "next/navigation";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 const ProfileLayout = () => {
-  const router = useRouter();
-
   return (
     <div className=" max-w-full">
       <div className=" flex  flex-col gap-4 overflow-hidden py-5 lg:flex-row">
@@ -123,37 +110,17 @@ const ProfileLayout = () => {
                 variant="outline"
                 className="border border-gray-300 text-gray-700 hover:bg-gray-100"
               >
-                <EditIcon className="h-4 w-4" />
-                <span className="ml-2">Edit Profile</span>
+                <PlusIcon className="h-4 w-4" />
+                <span className="ml-1">Follow</span>
               </Button>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border border-gray-300 text-gray-700 hover:bg-gray-100"
-                  >
-                    <Share2Icon className="h-4 w-4" />
-                    <span className="ml-2">Share Profile</span>
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-full">
-                  <div className=" flex items-center space-x-4 text-center">
-                    <div className="rounded-full border-2 border-gray-500 p-1">
-                      <FacebookIcon className="h-4 w-4 cursor-pointer" />
-                    </div>
-                    <div className="rounded-full border-2 border-gray-500 p-1">
-                      <TwitterIcon className="h-4 w-4 cursor-pointer" />
-                    </div>
-                    <div className="rounded-full border-2 border-gray-500 p-1">
-                      <PhoneCallIcon className="h-4 w-4 cursor-pointer" />
-                    </div>
-                    <div className="rounded-full border-2 border-gray-500 p-1">
-                      <InstagramIcon className="h-4 w-4 cursor-pointer" />
-                    </div>
-                  </div>
-                </PopoverContent>
-              </Popover>
+              <Button
+                size="sm"
+                variant="outline"
+                className="border border-gray-300 text-gray-700 hover:bg-gray-100"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span className="ml-2">Message</span>
+              </Button>
             </div>
           </div>
         </div>

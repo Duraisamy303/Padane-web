@@ -303,5 +303,64 @@ export const key_performers = [
         // { id: 10, name: "Emma White", role: "Band" },
       ];
       
+      export const RelatedEvents = [
+        {
+          id: 1,
+          name: "Music Festival 2025",
+          date: "Jan 1, 2025",
+          location: "New York City, NY",
+          concet_Type: "Offline",
+        },
+        {
+          id: 2,
+          name: "Summer Concert Series",
+          date: "Jul 15, 2025",
+          location: "Los Angeles, CA",
+          concet_Type: "Offline",
+        },
+        {
+          id: 3,
+          name: "Virtual Concert 2025",
+          date: "Oct 10, 2025",
+          location: "Online",
+          concet_Type: "Online",
+        },
+        {
+          id: 4,
+          name: "Music Festival 2025",
+          date: "Jan 1, 2025",
+          location: "New York City, NY",
+          concet_Type: "Offline",
+        },
+        {
+          id: 5,
+          name: "Summer Concert Series",
+          date: "Jul 15, 2025",
+          location: "Los Angeles, CA",
+          concet_Type: "Offline",
+        },
+        {
+          id: 6,
+          name: "Virtual Concert 2025",
+          date: "Oct 10, 2025",
+          location: "Online",
+          concet_Type: "Online",
+        },
+        {
+          id: 7,
+          name: "Music Festival 2025",
+          date: "Jan 1, 2025",
+          location: "New York City, NY",
+          concet_Type: "Offline",
+        },
+        {
+            
+          id: 8,
+          name: "Summer Concert Series",
+          date: "Jul 15, 2025",
+          location: "Los Angeles, CA",
+          concet_Type: "Offline",
+        },
+      ]
 
       

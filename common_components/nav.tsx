@@ -61,7 +61,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="hidden gap-6 md:flex">
+          <div className="hidden gap-6 lg:flex">
             {navLinks.map((link) => (
               <NavLink key={link.label} href={link.href} label={link.label} />
             ))}
@@ -114,7 +114,7 @@ export default function Home() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={toggleSidebar}
             >
               {isSidebarOpen ? (
