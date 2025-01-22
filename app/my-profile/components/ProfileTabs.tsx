@@ -25,7 +25,7 @@ import {
   RecommentedPeoples,
   skills,
 } from "@/utils/constant.utils";
-import { EditIcon, EyeIcon, MapPin, View, ViewIcon } from "lucide-react";
+import { EditIcon, EyeIcon, MapPin, Trash2, View, ViewIcon } from "lucide-react";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
@@ -163,7 +163,7 @@ const ProfileTabs = () => {
                     onClick={() => handleEdit(performer?.name)}
                     className="h-6 w-6 p-1"
                   >
-                    <Pencil1Icon className="h-4 w-4" />
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               ))}
