@@ -326,7 +326,7 @@ const ProfileTabs = () => {
                             <ScrollArea
                               className={cn(
                                 " w-full pr-5",
-                                recent_posts?.liked_users?.length > 9
+                                recent_posts?.liked_users?.length > 6
                                   ? "h-96"
                                   : "h-full",
                               )}

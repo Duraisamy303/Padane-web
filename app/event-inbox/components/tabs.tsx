@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from "react";
 import {
   Card,
@@ -21,76 +18,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const TabSection = ({ selectedCategory, onSelectChat,ontoggle }) => {
-  // Data arrays
-  const invitation = {
-    received: [
-      {
-        id: 1,
-        from: "@Indumathi Navinkumar",
-        to: "Coimbatore rocks - Received",
-        message: "Hi this is artist vignesh from Coimbatore.",
-      },
-      {
-        id: 2,
-        from: "@John Doe",
-        to: "Chennai vibes - Received",
-        message: "Hi this is artist John from Chennai.",
-      },
-    ],
-    accepted: [
-      {
-        id: 3,
-        from: "@Jane Smith",
-        to: "Bangalore beats - Accepted",
-        message: "Hi this is artist Jane from Bangalore.",
-      },
-    ],
-    rejected: [
-      {
-        id: 4,
-        from: "@Alice Walker",
-        to: "Delhi dreams - Rejected",
-        message: "Hi this is artist Alice from Delhi.",
-      },
-    ],
-    pending: [
-      {
-        id: 5,
-        from: "@Bob Brown",
-        to: "Mumbai magic - Pending",
-        message: "Hi this is artist Bob from Mumbai.",
-      },
-    ],
-  };
-
-  const interested = {
-    received: [
-      {
-        id: 6,
-        from: "@Tom Hardy",
-        to: "Kolkata culture - Received",
-        message: "Hi this is artist Tom from Kolkata.",
-      },
-    ],
-    accepted: [
-      {
-        id: 7,
-        from: "@Emma Stone",
-        to: "Pune passion - Accepted",
-        message: "Hi this is artist Emma from Pune.",
-      },
-    ],
-    rejected: [],
-    pending: [
-      {
-        id: 8,
-        from: "@Chris Evans",
-        to: "Hyderabad harmony - Pending",
-        message: "Hi this is artist Chris from Hyderabad.",
-      },
-    ],
-  };
+export const TabSection = ({ selectedCategory, onSelectChat,ontoggle,invitation,interested }) => {
+ 
 
   const filterMenu = ["All", "Received", "Accepted", "Rejected", "Pending"];
 
@@ -128,25 +57,30 @@ export const TabSection = ({ selectedCategory, onSelectChat,ontoggle }) => {
     ontoggle(isOpen)
   };
 
+
+  
+
   return (
     <Tabs defaultValue="invitation" onValueChange={setSelectedTab}>
-      <TabsList className="flex justify-evenly w-full">
+      {/* <TabsList className="flex justify-evenly w-full">
+       
+        <TabsTrigger value="invitation">Invitation</TabsTrigger>
+        <TabsTrigger value="interested">Interested</TabsTrigger>
+      </TabsList> */}
+      
+
+      <div className={`flex items-center justify-between lg:justify-end mt-4 mx-3`}>
       <button
-        className={`lg:hidden p-3   z-50 rounded-md ${isOpen? " fixed left-[200px]":" left-4"}`}
+        className={`lg:hidden p-3  rounded-md ${isOpen? " fixed left-[200px] top-3 z-50":" left-4"}`}
         onClick={toggleSidebar}
         aria-label="Toggle Sidebar"
       >
         {isOpen ? (
-          <XIcon className="w-6 h-6 text-white " />
+          <XIcon className="w-6 h-6 text-grey " />
         ) : (
-          <MenuIcon className="w-6 h-6 " />
+          <MenuIcon className="w-6 h-6 text-grey " />
         )}
       </button>
-        <TabsTrigger value="invitation">Invitation</TabsTrigger>
-        <TabsTrigger value="interested">Interested</TabsTrigger>
-      </TabsList>
-
-      <div className="flex items-center justify-end mt-4 mx-3">
         <Select onValueChange={(value) => setSelectedFilter(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Theme" />
