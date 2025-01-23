@@ -218,6 +218,7 @@ export default function Index() {
           setState({ activeTab: item });
         }}
       />
+      <div className="container">
       {state.activeTab !== "Create New Event" ? (
        <div className="flex h-full flex-col gap-3 p-4 md:flex-row">
        <div className="md:w-3/4 lg:w-3/4">
@@ -850,6 +851,7 @@ export default function Index() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
