@@ -448,7 +448,7 @@ export const Recent_posts = [
   title: "Marakkuma Nenjam",
   description: "Check out my latest music release on Spotify!",
   image: "http://padane.in/media/event_poster/event_8hJeZB9.jpg",
-  like_count: 10,
+  like_count: 7,
   comment_count: 5,
   share_count: 10,
   liked: false,
@@ -465,7 +465,23 @@ export const Recent_posts = [
   {
     id: 3,
     name: "Emily Davis",
-  }
+  },
+  {
+    id: 4,
+    name: "John Doe",
+  },
+  {
+    id: 5,
+    name: "Jane Smith",
+  },
+  {
+    id: 6,
+    name: "Michael Johnson",
+  },
+  {
+    id: 7,
+    name: "Emily Davis",
+  },
 ],
 
   comments: [

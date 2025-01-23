@@ -51,6 +51,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+
 const ProfileTabs = () => {
   const [commentToggles, setCommentToggles] = useState({});
   const [likedUsersToggle, setLikedUsersToggle] = useState({});
@@ -225,17 +228,19 @@ const ProfileTabs = () => {
                           <div className="flex items-center space-x-[-10px]">
                             {" "}
                             {/* Adjust space between images */}
-                            {recent_posts?.liked_users.map((user, index) => (
-                              <Avatar
-                                key={index}
-                                className={`h-7 w-7 overflow-hidden rounded-full ${index === 1 ? "ml-[-10px]" : ""} ${index === 2 ? "ml-[-10px]" : ""}`}
-                              >
-                                <AvatarImage
-                                  src={`https://i.pravatar.cc/150?img=${user.id}`}
-                                  alt={user?.name}
-                                />
-                              </Avatar>
-                            ))}
+                            {recent_posts?.liked_users
+                              ?.slice(0, 3)
+                              .map((user, index) => (
+                                <Avatar
+                                  key={index}
+                                  className={`h-7 w-7 overflow-hidden rounded-full ${index === 1 ? "ml-[-10px]" : ""} ${index === 2 ? "ml-[-10px]" : ""}`}
+                                >
+                                  <AvatarImage
+                                    src={`https://i.pravatar.cc/150?img=${user.id}`}
+                                    alt={user?.name}
+                                  />
+                                </Avatar>
+                              ))}
                           </div>
                           <div className="flex items-center space-x-1">
                             <p className="text-md font-medium text-gray-500">
@@ -285,52 +290,51 @@ const ProfileTabs = () => {
                       {likedUsersToggle[recent_posts.id] && (
                         <Dialog
                           open={selectedPostId === recent_posts.id}
-                          onClose={closeDialog}
+                          onOpenChange={closeDialog}
                           className="fixed inset-0 z-50 flex items-center justify-center"
                         >
-                          <DialogContent className="mx-auto max-w-lg rounded-lg bg-white p-6">
-                            <DialogTitle className="mb-4 text-xl font-semibold">
-                              Liked by
-                            </DialogTitle>
-                            <div className="flex items-center">
-                              {
-                                recent_posts?.liked_users.map((user, index) => (
-                                  <Avatar
+                          <DialogContent
+                            className={cn(
+                              "mx-auto max-w-md rounded-lg bg-white p-6",
+                            )}
+                          >
+                            <DialogHeader>
+                              <DialogTitle>Liked Users</DialogTitle>
+                            </DialogHeader>
+
+                            <SelectSeparator className="border-t" />
+
+                            {/* List of liked users */}
+                            <ScrollArea className={cn(" w-full pr-5", recent_posts?.liked_users?.length > 6 ? "h-96" : "h-full")}>
+                              {recent_posts?.liked_users?.map(
+                                (people, index) => (
+                                  <div
                                     key={index}
-                                    className="h-10 w-10 rounded-full"
+                                    className={cn(
+                                      "flex cursor-pointer items-center space-x-4 space-y-0 pb-3",
+                                    )}
                                   >
-                                    <AvatarImage
-                                      src={`https://i.pravatar.cc/150?img=${user.id}`}
-                                      alt={user?.name}
-                                    />
-                                  </Avatar>
-                                ))
-
-                              }
-                              <Avatar className="h-10 w-10 overflow-hidden rounded-full">
-                                <img
-                                  src={`https://i.pravatar.cc/150?img=${recent_posts.id}`}
-                                  alt={`${recent_posts?.user_name}'s avatar`}
-                                />
-                              </Avatar>
-                              <div className="ml-2">
-                                <p className="font-medium leading-none">
-                                  {recent_posts?.user_name}
-                                </p>
-
-                                <span className="text-xs leading-none text-gray-500">
-                                  {recent_posts?.date}, {recent_posts?.time}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="mt-4 flex justify-end">
-                              <button
-                                onClick={closeDialog}
-                                className="rounded-md bg-blue-500 px-4 py-2 text-white"
-                              >
-                                Close
-                              </button>
-                            </div>
+                                    <Avatar className="h-10 w-10 overflow-hidden rounded-full">
+                                      <img
+                                        src={`https://i.pravatar.cc/150?img=${index + 1}`}
+                                        alt={`avatar`}
+                                      />
+                                    </Avatar>
+                                    <div className="flex-grow">
+                                      <p className="text-md font-medium">
+                                        {people.name}
+                                      </p>
+                                      <p className="text-xs text-gray-500">
+                                        {people.name}
+                                      </p>
+                                    </div>
+                                    <p className="text-xs text-black">
+                                      <EyeIcon className="h-4 w-4" />
+                                    </p>
+                                  </div>
+                                ),
+                              )}
+                            </ScrollArea>
                           </DialogContent>
                         </Dialog>
                       )}
