@@ -206,7 +206,7 @@ export default function Index() {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
 
-  const tabs = ["Upcoming", "Completed ", "New Event"];
+  const tabs = ["Upcoming Events", "Completed Events", "Create Event"];
 
 
   return (

@@ -23,8 +23,8 @@ export default function Menu(props: any) {
     <div className="mt-2 w-full bg-white px-4 py-2 shadow dark:bg-gray-900 md:px-8">
       <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:gap-8">
         {/* Tabs Section */}
-        <Tabs defaultValue="filter">
-          <TabsList className="scrollbar-hide flex flex-nowrap gap-4 overflow-x-auto bg-white py-2 md:gap-8">
+        <Tabs defaultValue="filter" >
+          <TabsList className="flex flex-nowrap gap-4 h-full overflow-x-auto bg-white py-2 md:gap-8">
             {tabs.map((item: any, index: any) => (
               <TabsTrigger
                 key={index}
