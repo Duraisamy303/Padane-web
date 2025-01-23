@@ -19,6 +19,7 @@ import Modal from "@/common_components/modal";
 import Combobox from "@/common_components/dropdown";
 import { CheckboxDemo } from "@/common_components/checkbox";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"; // Tabs from Shadcn
+import Event_cart from "@/components/Event_cart";
 
 const sampleData = [
   {
@@ -205,6 +206,69 @@ const handleSelectChange = (person: { name: string; logo: string }) => {
 
   const tabs = ["Upcoming Event", "Completed Event", "Create New Event"];
 
+  const nearEvent = [
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+  ];
+
   return (
     <div className="h-screen w-full">
       <Navbar />
@@ -217,7 +281,10 @@ const handleSelectChange = (person: { name: string; logo: string }) => {
       {state.activeTab !== "Create New Event" ? (
         <div className="flex h-full flex-col p-4 md:flex-row">
           <div className="grid w-full grid-cols-1 gap-6 px-4 md:w-3/4 ">
-            {sampleData.map((item) => (
+          {nearEvent.map((item, index) => (
+            <Event_cart key={index} item={item} />
+          ))}
+            {/* {sampleData.map((item) => (
               <Card
                 key={item.id}
                 className="flex flex-col rounded-lg  bg-white shadow-md lg:flex-row lg:p-4"
@@ -263,7 +330,7 @@ const handleSelectChange = (person: { name: string; logo: string }) => {
                   </p>
                 </div>
               </Card>
-            ))}
+            ))} */}
           </div>
 
           <div className="mt-6 w-full md:mt-0 md:w-1/4 md:pl-3">

@@ -22,10 +22,70 @@ import moment from "moment";
 import Image from "next/image";
 import React from "react";
 import Meets_up from "@/components/Meets_up";
-import { nearEvent } from "@/utils/constant.utils";
 
 export default function Home() {
-  
+  const nearEvent = [
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+  ];
 
   const category = [
     {
@@ -99,9 +159,11 @@ export default function Home() {
 
         <div className="flex w-full items-center justify-center md:w-1/2">
           <Image
-            src={Assets.mobile_ping_1}
+            src={Assets.events}
             alt="Mobile Ping Image"
-            className="max-h-full max-w-full object-contain"
+            height={500}
+            width={500}
+            className=" object-cover"
           />
         </div>
       </div>
