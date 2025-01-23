@@ -22,10 +22,70 @@ import moment from "moment";
 import Image from "next/image";
 import React from "react";
 import Meets_up from "@/components/Meets_up";
-import { nearEvent } from "@/utils/constant.utils";
 
 export default function Home() {
-  
+  const nearEvent = [
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+    {
+      image:
+        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
+      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
+      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
+      invite: 57,
+      interesr: 100,
+      like: 10,
+    },
+  ];
 
   const category = [
     {
