@@ -41,9 +41,33 @@ import {
 } from "lucide-react";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ProfileTabs = () => {
   const [commentToggles, setCommentToggles] = useState({});
+  const [likedUsersToggle, setLikedUsersToggle] = useState({});
+  const [selectedPostId, setSelectedPostId] = useState(null);
+
+  const handleLikedUsersToggle = (postId) => {
+    setSelectedPostId(postId); // Set the selected post to open the dialog
+    setLikedUsersToggle((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId], // Toggle the visibility of the liked users dialog
+    }));
+  };
+
+  const closeDialog = () => {
+    setLikedUsersToggle({});
+    setSelectedPostId(null);
+  };
 
   const handleCommentToggle = (postId) => {
     setCommentToggles((prevState) => ({
@@ -216,11 +240,23 @@ const ProfileTabs = () => {
                           <div className="flex items-center space-x-1">
                             <p className="text-md font-medium text-gray-500">
                               Liked by{" "}
-                              {recent_posts?.liked_users.length > 1
-                                ? `${recent_posts?.liked_users[0]?.name} and others`
-                                : recent_posts?.liked_users.map(
-                                    (user, index) => user?.name,
-                                  )}
+                              {recent_posts?.liked_users.length > 1 ? (
+                                <>
+                                  {recent_posts?.liked_users[0]?.name} and{" "}
+                                  <span
+                                    className="cursor-pointer text-blue-500"
+                                    onClick={() =>
+                                      handleLikedUsersToggle(recent_posts.id)
+                                    }
+                                  >
+                                    others
+                                  </span>
+                                </>
+                              ) : (
+                                recent_posts?.liked_users.map(
+                                  (user) => user?.name,
+                                )
+                              )}
                             </p>
                           </div>
                         </div>
@@ -243,6 +279,60 @@ const ProfileTabs = () => {
                             <SendIcon className="h-6 w-6" />
                           </Button>
                         </div>
+                      )}
+
+                      {/* Dialog Box for Liked Users List */}
+                      {likedUsersToggle[recent_posts.id] && (
+                        <Dialog
+                          open={selectedPostId === recent_posts.id}
+                          onClose={closeDialog}
+                          className="fixed inset-0 z-50 flex items-center justify-center"
+                        >
+                          <DialogContent className="mx-auto max-w-lg rounded-lg bg-white p-6">
+                            <DialogTitle className="mb-4 text-xl font-semibold">
+                              Liked by
+                            </DialogTitle>
+                            <div className="flex items-center">
+                              {
+                                recent_posts?.liked_users.map((user, index) => (
+                                  <Avatar
+                                    key={index}
+                                    className="h-10 w-10 rounded-full"
+                                  >
+                                    <AvatarImage
+                                      src={`https://i.pravatar.cc/150?img=${user.id}`}
+                                      alt={user?.name}
+                                    />
+                                  </Avatar>
+                                ))
+
+                              }
+                              <Avatar className="h-10 w-10 overflow-hidden rounded-full">
+                                <img
+                                  src={`https://i.pravatar.cc/150?img=${recent_posts.id}`}
+                                  alt={`${recent_posts?.user_name}'s avatar`}
+                                />
+                              </Avatar>
+                              <div className="ml-2">
+                                <p className="font-medium leading-none">
+                                  {recent_posts?.user_name}
+                                </p>
+
+                                <span className="text-xs leading-none text-gray-500">
+                                  {recent_posts?.date}, {recent_posts?.time}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="mt-4 flex justify-end">
+                              <button
+                                onClick={closeDialog}
+                                className="rounded-md bg-blue-500 px-4 py-2 text-white"
+                              >
+                                Close
+                              </button>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       )}
                     </div>
                   </div>
