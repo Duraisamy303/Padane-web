@@ -196,32 +196,38 @@ const ProfileTabs = () => {
                         </Button>
                       </div>
 
-                      <div className="mt-2 flex items-center space-x-1">
-                        <div className="flex items-center space-x-[-10px]">
+                      <div className="mt-2 flex items-center justify-between space-x-1">
+                        <div className="flex items-center  space-x-2">
+                          <div className="flex items-center space-x-[-10px]">
+                            {" "}
+                            {/* Adjust space between images */}
+                            {recent_posts?.liked_users.map((user, index) => (
+                              <Avatar
+                                key={index}
+                                className={`h-7 w-7 overflow-hidden rounded-full ${index === 1 ? "ml-[-10px]" : ""} ${index === 2 ? "ml-[-10px]" : ""}`}
+                              >
+                                <AvatarImage
+                                  src={`https://i.pravatar.cc/150?img=${user.id}`}
+                                  alt={user?.name}
+                                />
+                              </Avatar>
+                            ))}
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <p className="text-md font-medium text-gray-500">
+                              Liked by{" "}
+                              {recent_posts?.liked_users.length > 1
+                                ? `${recent_posts?.liked_users[0]?.name} and others`
+                                : recent_posts?.liked_users.map(
+                                    (user, index) => user?.name,
+                                  )}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-md cursor-pointer text-gray-500">
                           {" "}
-                          {/* Adjust space between images */}
-                          {recent_posts?.liked_users.map((user, index) => (
-                            <Avatar
-                              key={index}
-                              className={`h-7 w-7 overflow-hidden rounded-full ${index === 1 ? "ml-[-10px]" : ""} ${index === 2 ? "ml-[-10px]" : ""}`}
-                            >
-                              <AvatarImage
-                                src={`https://i.pravatar.cc/150?img=${user.id}`}
-                                alt={user?.name}
-                              />
-                            </Avatar>
-                          ))}
-                        </div>
-                        <div>
-                          <p className="text-md font-medium text-gray-500">
-                            Liked by{" "}
-                            {recent_posts?.liked_users.length > 1
-                              ? `${recent_posts?.liked_users[0]?.name} and others`
-                              : recent_posts?.liked_users.map(
-                                  (user, index) => user?.name,
-                                )}
-                          </p>
-                        </div>
+                          {recent_posts?.comment_count} comments
+                        </p>
                       </div>
                       {/* Comment section toggle */}
                       {commentToggles[recent_posts.id] && (
