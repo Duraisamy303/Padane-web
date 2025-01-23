@@ -59,17 +59,30 @@ const ProfileTabs = () => {
   const [likedUsersToggle, setLikedUsersToggle] = useState({});
   const [selectedPostId, setSelectedPostId] = useState(null);
 
+  const [commentUsersToggle, setCommentUsersToggle] = useState({});
+
   const handleLikedUsersToggle = (postId) => {
     setSelectedPostId(postId); // Set the selected post to open the dialog
     setLikedUsersToggle((prevState) => ({
       ...prevState,
       [postId]: !prevState[postId], // Toggle the visibility of the liked users dialog
     }));
+    setCommentUsersToggle({}); // Close the comment users dialog
+  };
+
+  const handleCommentUsersToggle = (postId) => {
+    setSelectedPostId(postId); // Set the selected post to open the dialog
+    setCommentUsersToggle((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId], // Toggle the visibility of the liked users dialog
+    }));
+    setLikedUsersToggle({}); // Close the liked users dialog
   };
 
   const closeDialog = () => {
     setLikedUsersToggle({});
     setSelectedPostId(null);
+    setCommentUsersToggle({});
   };
 
   const handleCommentToggle = (postId) => {
@@ -265,7 +278,12 @@ const ProfileTabs = () => {
                             </p>
                           </div>
                         </div>
-                        <p className="text-md cursor-pointer text-gray-500">
+                        <p
+                          className="text-md cursor-pointer text-gray-500"
+                          onClick={() =>
+                            handleCommentUsersToggle(recent_posts.id)
+                          }
+                        >
                           {" "}
                           {recent_posts?.comment_count} comments
                         </p>
@@ -305,7 +323,14 @@ const ProfileTabs = () => {
                             <SelectSeparator className="border-t" />
 
                             {/* List of liked users */}
-                            <ScrollArea className={cn(" w-full pr-5", recent_posts?.liked_users?.length > 6 ? "h-96" : "h-full")}>
+                            <ScrollArea
+                              className={cn(
+                                " w-full pr-5",
+                                recent_posts?.liked_users?.length > 9
+                                  ? "h-96"
+                                  : "h-full",
+                              )}
+                            >
                               {recent_posts?.liked_users?.map(
                                 (people, index) => (
                                   <div
@@ -334,6 +359,64 @@ const ProfileTabs = () => {
                                   </div>
                                 ),
                               )}
+                            </ScrollArea>
+                          </DialogContent>
+                        </Dialog>
+                      )}
+
+                      {/* Dialog Box for Comment Users List */}
+                      {commentUsersToggle[recent_posts.id] && (
+                        <Dialog
+                          open={selectedPostId === recent_posts.id}
+                          onOpenChange={closeDialog}
+                          className="fixed inset-0 z-50 flex items-center justify-center"
+                        >
+                          <DialogContent
+                            className={cn(
+                              "mx-auto max-w-md rounded-lg bg-white p-6",
+                            )}
+                          >
+                            <DialogHeader>
+                              <DialogTitle>Comment Users</DialogTitle>
+                            </DialogHeader>
+
+                            <SelectSeparator className="border-t" />
+
+                            {/* List of liked users */}
+                            <ScrollArea className={cn(" pr-5h-96 w-full")}>
+                              {recent_posts?.comments?.map((people, index) => (
+                                <div key={index} className="pb-5 ">
+                                  <div
+                                    key={index}
+                                    className={cn(
+                                      "flex cursor-pointer items-center space-x-2 space-y-0 pb-1",
+                                    )}
+                                  >
+                                    <Avatar className="h-7 w-7 overflow-hidden rounded-full">
+                                      <img
+                                        src={`https://i.pravatar.cc/150?img=${index + 1}`}
+                                        alt={`avatar`}
+                                      />
+                                    </Avatar>
+                                    <div className="flex-grow">
+                                      <p className="text-sm font-medium">
+                                        {people.user_name}
+                                      </p>
+                                      <p className="text-xs text-gray-500">
+                                        {people.date}, {people.time}
+                                      </p>
+                                    </div>
+                                    <p className="text-xs text-black">
+                                      <Trash2 className="h-4 w-4" />
+                                    </p>
+                                  </div>
+                                  <div className="pt-1">
+                                    <p className="text-sm text-gray-500">
+                                      {people?.comment}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
                             </ScrollArea>
                           </DialogContent>
                         </Dialog>
