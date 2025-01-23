@@ -11,9 +11,8 @@ export default function Index() {
     activeTab: 0,
   });
 
-
-   // Data arrays
-   const invitation = {
+  // Data arrays
+  const invitation = {
     received: [
       {
         id: 1,
@@ -36,9 +35,7 @@ export default function Index() {
         message: "Hi this is artist Jane from Bangalore.",
       },
     ],
-    rejected: [
-      
-    ],
+    rejected: [],
     pending: [
       {
         id: 5,
@@ -67,13 +64,13 @@ export default function Index() {
       },
     ],
     rejected: [
-       {
-      id: 7,
-      from: "@Emma Stone",
-      to: "Pune passion - Accepted",
-      message: "Hi this is artist Emma from Pune.",
-    },
-  ],
+      {
+        id: 7,
+        from: "@Emma Stone",
+        to: "Pune passion - Accepted",
+        message: "Hi this is artist Emma from Pune.",
+      },
+    ],
     pending: [
       {
         id: 8,
@@ -106,35 +103,28 @@ export default function Index() {
     // }
   };
 
-
-  
-
   const ontoggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen); // Toggle the sidebar
   };
 
-  const handleChat = (toggel) =>{
-    setDrawerOpen(!toggel)
-  }
+  const handleChat = (toggel) => {
+    setDrawerOpen(!toggel);
+  };
 
-
-
-
-  console.log("chat close",isDrawerOpen);
-    console.log("selectchat",selectedChat);
-  
+  console.log("chat close", isDrawerOpen);
+  console.log("selectchat", selectedChat);
 
   return (
-    <div className="h-screen w-full flex flex-col">
+    <div className="flex h-screen w-full flex-col">
       {/* Navbar */}
       <div className="w-full">
         <Navbar />
       </div>
 
       {/* Main Content: Sidebar, TabSection, and ChatOption */}
-      <div className="flex align-start flex-wrap w-full relative">
+      <div className="align-start relative flex w-full flex-wrap">
         <div
-          className={`lg:w-1/6 fixed lg:relative top-0 left-0 h-full bg-white z-20 transition-transform duration-300 ease-in-out ${
+          className={`fixed left-0 top-0 z-20 h-full bg-white transition-transform duration-300 ease-in-out lg:relative lg:w-1/6 ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0`}
         >
@@ -154,14 +144,15 @@ export default function Index() {
             ontoggle={ontoggleSidebar}
             invitation={invitation}
             interested={interested}
-
           />
         </div>
 
         {/* ChatOption */}
         <div
-          className={`right-0 h-full lg:h-auto bg-white border-gray-500 border-t lg:border-none transition-transform duration-500 ease-in-out ${
-            selectedChat ? "lg:relative fixed translate-x-0 top-[50px] lg:top-0" : "hidden translate-x-full"
+          className={`right-0 h-full border-t border-gray-500 bg-white transition-transform duration-500 ease-in-out lg:h-auto lg:border-none ${
+            selectedChat
+              ? "fixed top-[50px] translate-x-0 lg:relative lg:top-0"
+              : "hidden translate-x-full"
           } w-full lg:w-3/6`}
         >
           <ChatOption onSelectChat={selectedChat} closeChat={handleChat} />

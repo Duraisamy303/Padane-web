@@ -10,14 +10,13 @@ import {
   MailWarning,
 } from "lucide-react";
 
-
 interface SidebarProps {
   items?: { label: string; icon?: React.ReactNode; href: string }[];
   className?: string;
   onSelectCategory?: (category: string) => void;
-  ontoggle:any;
-  invitation:any;
-  interested:any
+  ontoggle: any;
+  invitation: any;
+  interested: any;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -25,13 +24,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   className,
   ontoggle,
   invitation,
-  interested
-  
-  
+  interested,
 }) => {
-
-
-  
   const [isOpen, setIsOpen] = useState(ontoggle);
   const [selectedCategory, setSelectedCategory] = useState("received");
 
@@ -40,17 +34,57 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const invitationMenu = [
-    { id: 1, name: "Received", icon: <MailOpen />, count: invitation.received.length },
-    { id: 2, name: "Accepted", icon: <MailIcon />,count: invitation.accepted.length },
-    { id: 3, name: "Rejected", icon: <MailMinus />,count: invitation.rejected.length },
-    { id: 4, name: "Pending", icon: <MailQuestion /> ,count: invitation.pending.length},
+    {
+      id: 1,
+      name: "Received",
+      icon: <MailOpen />,
+      count: invitation.received.length,
+    },
+    {
+      id: 2,
+      name: "Accepted",
+      icon: <MailIcon />,
+      count: invitation.accepted.length,
+    },
+    {
+      id: 3,
+      name: "Rejected",
+      icon: <MailMinus />,
+      count: invitation.rejected.length,
+    },
+    {
+      id: 4,
+      name: "Pending",
+      icon: <MailQuestion />,
+      count: invitation.pending.length,
+    },
   ];
 
   const interestMenu = [
-    { id: 1, name: "Sent", icon: <MailWarning /> ,count: interested.sent.length},
-    { id: 2, name: "Accepted", icon: <MailIcon /> ,count: interested.accepted.length},
-    { id: 3, name: "Rejected", icon: <MailIcon />,count: interested.rejected.length },
-    { id: 4, name: "Pending", icon: <MailIcon /> ,count: interested.pending.length},
+    {
+      id: 1,
+      name: "Sent",
+      icon: <MailWarning />,
+      count: interested.sent.length,
+    },
+    {
+      id: 2,
+      name: "Accepted",
+      icon: <MailIcon />,
+      count: interested.accepted.length,
+    },
+    {
+      id: 3,
+      name: "Rejected",
+      icon: <MailIcon />,
+      count: interested.rejected.length,
+    },
+    {
+      id: 4,
+      name: "Pending",
+      icon: <MailIcon />,
+      count: interested.pending.length,
+    },
   ];
 
   const handleCategoryClick = (category: any) => {
@@ -74,65 +108,76 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </button> */}
 
       {/* Sidebar */}
-     
+
       <aside
         className={cn(
-         "md:w-64 w-64 bg-white lg:bg-transparent text-black  space-y-6  fixed  lg-top-none left-0 z-40 transform transition-transform lg:translate-x-0 h-screen lg:h-auto",
-         ontoggle ? " translate-x-0" : "-translate-x-full",
-          className
+          "lg-top-none fixed left-0 z-40 h-screen  w-64  transform  space-y-6 bg-white text-black transition-transform md:w-64 lg:h-auto lg:translate-x-0 lg:bg-transparent",
+          ontoggle ? " translate-x-0" : "-translate-x-full",
+          className,
         )}
       >
         <nav className="px-4 py-6">
-          <h2 className="text-xl font-semibold mb-4">Categories</h2>
           <div className="mt-6">
             <h3 className="text-lg font-medium text-gray-400">Invitation</h3>
             <ul className="mt-2 space-y-2">
               {invitationMenu.map((item) => (
                 <li
                   key={item.id}
-                  className={`flex items-center space-x-4 py-2 lg:px-2 rounded-md  cursor-pointer ${
+                  className={`flex cursor-pointer items-center space-x-4 rounded-md py-2  lg:px-2 ${
                     selectedCategory === item.name ? "bg-transparent" : ""
                   }`}
-                  onClick={() =>{ handleCategoryClick(item.name)
-                    toggleSidebar}
-                  }
+                  onClick={() => {
+                    handleCategoryClick(item.name);
+                    toggleSidebar;
+                  }}
                 >
-                  <span className="text-gray-400">{item.icon}</span>
-                  <span className="lg:text-black">{item.name} - {item.count}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-400">{item.icon}</span>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="lg:text-black">{item.name} </span>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-500 p-2 text-white ">
+                        <span>{item.count} </span>
+                      </div>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-400 mt-5">Interest</h3>
+            <h3 className="mt-5 text-lg font-medium text-gray-400">Interest</h3>
             <ul className="mt-2 space-y-2">
               {interestMenu.map((item) => (
                 <li
                   key={item.id}
-                  className={`flex items-center space-x-4 py-2 rounded-md   cursor-pointer 
-                    ${
-                    selectedCategory === item.name ? "bg-transparent" : "" }
+                  className={`flex cursor-pointer items-center space-x-4 rounded-md   py-2 
+                    ${selectedCategory === item.name ? "bg-transparent" : ""}
                     `}
                   onClick={() => handleCategoryClick(item.name)}
                 >
-                  <span className="text-gray-400">{item.icon}</span>
-                  <span className="lg:text-black  ">{item.name} - {item.count}</span>
+                 <div className="flex items-center gap-2">
+                    <span className="text-gray-400">{item.icon}</span>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="lg:text-black">{item.name} </span>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-500 p-2 text-white ">
+                        <span>{item.count} </span>
+                      </div>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
-        
         </nav>
       </aside>
 
       {/* Overlay for Mobile */}
       {ontoggle && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          className="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
         />
       )}
     </>
   );
 };
-
