@@ -305,7 +305,14 @@ const ProfileTabs = () => {
                             <SelectSeparator className="border-t" />
 
                             {/* List of liked users */}
-                            <ScrollArea className={cn(" w-full pr-5", recent_posts?.liked_users?.length > 6 ? "h-96" : "h-full")}>
+                            <ScrollArea
+                              className={cn(
+                                " w-full pr-5",
+                                recent_posts?.liked_users?.length > 6
+                                  ? "h-96"
+                                  : "h-full",
+                              )}
+                            >
                               {recent_posts?.liked_users?.map(
                                 (people, index) => (
                                   <div
