@@ -159,9 +159,11 @@ export default function Home() {
 
         <div className="flex w-full items-center justify-center md:w-1/2">
           <Image
-            src={Assets.mobile_ping_1}
+            src={Assets.events}
             alt="Mobile Ping Image"
-            className="max-h-full max-w-full object-contain"
+            height={500}
+            width={500}
+            className=" object-cover"
           />
         </div>
       </div>
