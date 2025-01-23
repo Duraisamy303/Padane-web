@@ -87,7 +87,10 @@ export default function Homes() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
               {/* Dropdown: Event/Wall */}
               <div>
-                <Select>
+                <Select
+                  value={state.type}
+                  onValueChange={(e) => setState({ type: e })}
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select Type" />
                   </SelectTrigger>
@@ -138,48 +141,50 @@ export default function Homes() {
           </div>
 
           <div className="container mx-auto p-4">
-            {eventsData.map((item, index) => (
-              <Card key={index} className="mb-6 bg-gray-50 shadow-md">
-                {/* Date Header */}
-                <CardHeader className="border-b pb-2">
-                  <CardTitle className="text-lg font-semibold">
-                    {item.date}
-                  </CardTitle>
-                </CardHeader>
+            {state.type != "event"
+              ? eventsData.map((item, index) => (
+                  <Card key={index} className="mb-6 bg-gray-50 shadow-md">
+                    {/* Date Header */}
+                    <CardHeader className="border-b pb-2">
+                      <CardTitle className="text-lg font-semibold">
+                        {item.date}
+                      </CardTitle>
+                    </CardHeader>
 
-                {/* Events */}
-                <CardContent className="space-y-6">
-                  {item.events.map((event) => (
-                    <div
-                      key={event.id}
-                      className={cn(
-                        "flex flex-col gap-4 md:flex-row",
-                        "border-b pb-4 last:border-b-0",
-                      )}
-                    >
-                      {/* Event Image */}
-                      <img
-                        src={`https://i.pravatar.cc/150?img=${event.id}`}
-                        alt={event.title}
-                        className="w-full rounded-md md:w-1/3 lg:w-1/5"
-                      />
+                    {/* Events */}
+                    <CardContent className="space-y-6">
+                      {item.events.map((event) => (
+                        <div
+                          key={event.id}
+                          className={cn(
+                            "flex flex-col gap-4 md:flex-row",
+                            "border-b pb-4 last:border-b-0",
+                          )}
+                        >
+                          {/* Event Image */}
+                          <img
+                            src={`https://i.pravatar.cc/150?img=${event.id}`}
+                            alt={event.title}
+                            className="w-full rounded-md md:w-1/3 lg:w-1/5"
+                          />
 
-                      {/* Event Details */}
-                      <div className="flex-1 space-y-2">
-                        <h3 className="text-xl font-bold">{event.title}</h3>
-                        <p className="text-sm text-gray-600">
-                          {event.description}
-                        </p>
-                        <div className="text-sm text-gray-500">
-                          <p>📍 {event.location}</p>
-                          <p>⏰ {event.time}</p>
+                          {/* Event Details */}
+                          <div className="flex-1 space-y-2">
+                            <h3 className="text-xl font-bold">{event.title}</h3>
+                            <p className="text-sm text-gray-600">
+                              {event.description}
+                            </p>
+                            <div className="text-sm text-gray-500">
+                              <p>📍 {event.location}</p>
+                              <p>⏰ {event.time}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
+                      ))}
+                    </CardContent>
+                  </Card>
+                ))
+              : null}
           </div>
         </div>
       </div>
