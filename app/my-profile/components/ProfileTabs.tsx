@@ -1,6 +1,7 @@
+"use client";
 import { AspectRatio } from "@/components/ui/aspect-radio";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -42,6 +43,15 @@ import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 const ProfileTabs = () => {
+  const [commentToggles, setCommentToggles] = useState({});
+
+  const handleCommentToggle = (postId) => {
+    setCommentToggles((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId], // Toggle the specific post's comment section
+    }));
+  };
+
   const handleEdit = (skill) => {
     console.log(`Edit skill: ${skill}`);
     // Here you can implement your edit logic
@@ -113,12 +123,12 @@ const ProfileTabs = () => {
                 </Button>
               </div> */}
             </CardHeader>
-            <CardContent className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+            <CardContent className="w-full">
               {/* List of recent_posts */}
               {Recent_posts.map((recent_posts, index) => (
                 <div
                   key={index}
-                  className="flex  justify-between rounded-md border p-2"
+                  className="mt-5  flex justify-between rounded-md border p-2"
                 >
                   <div className="w-full">
                     <div className="flex items-center">
@@ -145,7 +155,7 @@ const ProfileTabs = () => {
                         {" "}
                         {recent_posts?.description}
                       </p>
-                      <div className="mt-2 h-48 w-full">
+                      <div className="mt-2 h-96 w-full">
                         <img
                           src={recent_posts?.image}
                           alt={recent_posts?.title}
@@ -168,6 +178,7 @@ const ProfileTabs = () => {
                         <Button
                           variant="outline"
                           className="relative border-none"
+                          onClick={() => handleCommentToggle(recent_posts.id)}
                         >
                           <MessageCircle className="h-6 w-6" />
                           <p className="text-md absolute right-0 top-0 rounded-full bg-gray-200 px-2 py-1 font-medium leading-none text-gray-500">
@@ -212,6 +223,21 @@ const ProfileTabs = () => {
                           </p>
                         </div>
                       </div>
+                      {/* Comment section toggle */}
+                      {commentToggles[recent_posts.id] && (
+                        <div className="relative mt-2 flex items-center space-x-2">
+                          <textarea
+                            className="mt-2 w-full rounded-md border p-2 pr-12"
+                            placeholder="Write a comment..."
+                          />
+                          <Button
+                            variant="outline"
+                            className="absolute right-5 mt-2 "
+                          >
+                            <SendIcon className="h-6 w-6" />
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

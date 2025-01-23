@@ -38,7 +38,7 @@ export default function Index() {
   return (
     <div className="h-screen w-full">
       <Navbar />
-      <Homes />
+      <Home />
     </div>
   );
 }
