@@ -1,30 +1,21 @@
-"use client"; // Mark this file as a client-side component
+"use client"; 
 
 import React, { useState, useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Avatar } from "@radix-ui/react-avatar";
 import {
-  ChevronLeftIcon,
-  DotFilledIcon,
-  DotsHorizontalIcon,
   ExclamationTriangleIcon,
-  QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 import {
+  ArrowLeftIcon,
   LocateIcon,
-  LogOutIcon,
+
   SendIcon,
-  SettingsIcon,
-  X,
+
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import {
   Dialog,
   DialogContent,
@@ -38,14 +29,11 @@ import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+
 } from "@/components/ui/card";
 
-const ChatOption = ({onSelectChat}) => {
-  console.log(onSelectChat);
+const ChatOption = ({onSelectChat,closeChat}) => {
+  
   
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
   const [message, setMessage] = useState("");
@@ -96,7 +84,7 @@ const ChatOption = ({onSelectChat}) => {
       ],
     },
   ]);
-  const [drawerOpen, setDrawerOpen] = useState(false); // State for toggling the drawer
+  const [drawerOpen, setDrawerOpen] = useState(true); // State for toggling the drawer
   const messageInputRef = useRef<HTMLInputElement | null>(null);
 
   // Handle selecting a chat
@@ -104,6 +92,11 @@ const ChatOption = ({onSelectChat}) => {
     setSelectedChat(chatId);
     setDrawerOpen(false); // Close the drawer when a chat is selected
   };
+
+  const handleChat = ()=>{
+    setDrawerOpen(!drawerOpen);
+    closeChat(drawerOpen)
+  }
 
   // Handle sending a message
   const handleSendMessage = () => {
@@ -148,11 +141,19 @@ const ChatOption = ({onSelectChat}) => {
     chat.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
+  const handleCloseChat = () => {
+    setDrawerOpen(!drawerOpen)
+    closeChat(drawerOpen); // Trigger the parent function to close the drawer
+  };
+
+ 
+  
+
   return (
-    <div className={`flex max-w-full  flex-col overflow-hidden bg-gray-100 lg:flex-row ${selectedChat ? "block" : "hidden"}`}>
+    <div className={`flex max-w-full p-3 flex-col overflow-hidden  lg:flex-row ${selectedChat ? "block" : "hidden"}`}>
    
       {/* Right side: Chat Window */}
-      <div className="relative mb-4 ml-4 mr-4 mt-4 flex h-[85vh] w-[100%] flex-col rounded-lg bg-white p-4 shadow-md ">
+      <div className="relative  flex h-[90vh] w-[100%] flex-col rounded-lg bg-white p-4  shadow-md">
         {/* User Profile (Sticky at top) */}
         {selectedChat !== null ? (
           <div className="sticky top-0  bg-gray-100 p-4 shadow-md">
@@ -160,10 +161,10 @@ const ChatOption = ({onSelectChat}) => {
               {/* Menu Icon and Drawer for Small Screens */}
               <div className="left-4 z-20 lg:hidden">
                 <Button
-                  onClick={() => setDrawerOpen(!drawerOpen)}
-                  className="rounded-full bg-blue-500 p-3  text-white"
+                  onClick={handleCloseChat} // Call the closeChat prop
+                  className="rounded-full bg-transparent hover:bg-transparent p-3 text-black"
                 >
-                  ☰ {/* Hamburger icon */}
+                  <ArrowLeftIcon />
                 </Button>
               </div>
 
