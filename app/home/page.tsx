@@ -22,70 +22,10 @@ import moment from "moment";
 import Image from "next/image";
 import React from "react";
 import Meets_up from "@/components/Meets_up";
+import { Meetup, NearEvent } from "@/utils/constant.utils";
 
 export default function Home() {
-  const nearEvent = [
-    {
-      image:
-        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
-      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
-      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
-      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
-      invite: 57,
-      interesr: 100,
-      like: 10,
-    },
-    {
-      image:
-        "http://padane.in/media/event_poster/event_1HxGeym.png",
-      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
-      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
-      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
-      invite: 57,
-      interesr: 100,
-      like: 10,
-    },
-    {
-      image:
-        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
-      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
-      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
-      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
-      invite: 57,
-      interesr: 100,
-      like: 10,
-    },
-    {
-      image:
-        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
-      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
-      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
-      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
-      invite: 57,
-      interesr: 100,
-      like: 10,
-    },
-    {
-      image:
-        "https://secure-content.meetupstatic.com/images/classic-events/525293555/272x153.webp?w=640",
-      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
-      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
-      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
-      invite: 57,
-      interesr: 100,
-      like: 10,
-    },
-    {
-      image:
-        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
-      name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
-      category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
-      time: "Sat Feb 01 2025 10:00:00 GMT+0530",
-      invite: 57,
-      interesr: 100,
-      like: 10,
-    },
-  ];
+ 
 
   const category = [
     {
@@ -122,21 +62,7 @@ export default function Home() {
     },
   ];
 
-  const meetup = [
-    {
-      title: "Discover events and groups",
-      ion: "",
-      subTitle: "See who's hosting local events for all the things you love",
-      links: "Search events and groups",
-    },
-    {
-      title: "Start a group to host events",
-      ion: "",
-      subTitle:
-        "Create your own Meetup group, and draw from a community of millions",
-      links: "Start a group",
-    },
-  ];
+
 
   return (
     <div className="container md:p-20">
@@ -163,6 +89,7 @@ export default function Home() {
             alt="Mobile Ping Image"
             height={500}
             width={500}
+
             className=" object-cover"
           />
         </div>
@@ -173,7 +100,7 @@ export default function Home() {
           Events near
         </h1>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {nearEvent.map((item, index) => (
+          {NearEvent.map((item, index) => (
             <Event_cart key={index} item={item} />
           ))}
         </div>
@@ -184,7 +111,7 @@ export default function Home() {
         </h1>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {nearEvent.map((item, index) => (
+          {NearEvent.map((item, index) => (
             <Event_cart item={item} index={index} />
           ))}
         </div>
@@ -208,7 +135,7 @@ export default function Home() {
         </h1>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-          {meetup.map((item, index) => (
+          {Meetup.map((item, index) => (
             <Meets_up key={index} item={item} index={index} />
           ))}
         </div>
