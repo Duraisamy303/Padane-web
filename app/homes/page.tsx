@@ -27,10 +27,10 @@ export default function Homes() {
   });
 
   return (
-    <div className="container h-screen w-full p-4 md:p-10 ">
+    <div className="container h-screen w-full p-4  ">
       <div>
         <h1 className="mb-4 text-[30px] font-extrabold md:text-[40px]">
-          Welcome, Alaguraj 👋
+          Welcome, Vijay 👋
         </h1>
         <h1 className="mb-4 text-[15px] font-semibold md:text-[25px]">
           Events from your groups

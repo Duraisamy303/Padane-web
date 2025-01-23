@@ -99,7 +99,7 @@ export default function Home() {
         <h1 className="mb-4 text-[30px] font-semibold md:text-[30px]">
           Events near
         </h1>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {NearEvent.map((item, index) => (
             <Event_cart key={index} item={item} />
           ))}
@@ -110,7 +110,7 @@ export default function Home() {
           Upcoming online events
         </h1>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
           {NearEvent.map((item, index) => (
             <Event_cart item={item} index={index} />
           ))}
