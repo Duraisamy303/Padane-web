@@ -37,7 +37,7 @@ export default function Home() {
     },
     {
       image:
-        "https://secure.meetupstatic.com/photos/event/5/1/1/7/event_525560759.webp?w=640",
+        "http://padane.in/media/event_poster/event_1HxGeym.png",
       name: "IN PERSON! Apache Kafka® x Grafana Meetup Coimbatore - Feb 2025",
       category: "Hosted by: Coimbatore Apache Kafka® Meetup by Confluent",
       time: "Sat Feb 01 2025 10:00:00 GMT+0530",

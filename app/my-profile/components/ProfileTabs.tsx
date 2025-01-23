@@ -297,7 +297,7 @@ const ProfileTabs = () => {
                                 recent_posts?.liked_users.map((user, index) => (
                                   <Avatar
                                     key={index}
-                                    className="h-10 w-10 overflow-hidden rounded-full"
+                                    className="h-10 w-10 rounded-full"
                                   >
                                     <AvatarImage
                                       src={`https://i.pravatar.cc/150?img=${user.id}`}
